@@ -1,0 +1,2658 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>树成林 AI 榜 · 全国大学生 AI 创造力与实践成长榜</title>
+<meta name="description" content="树成林 AI 榜（SHU CHENG LIN · AI FOREST）——面向全国大学生的 AI 成长、实践与价值榜单。作品先于人气，证据先于口号，成长先于输赢。一人一树，众人成林。" />
+<meta name="keywords" content="树成林,AI榜,大学生AI,AI创作者,排行榜,AI生长舱,AI评审官,潜力森林,社会价值" />
+<meta name="theme-color" content="#10251B" />
+<meta name="author" content="树成林 AI 榜" />
+<link rel="canonical" href="https://example.com/" />
+<!-- canonical 占位：部署到公开平台后，请替换为真实域名 -->
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="树成林 AI 榜 · 让每一次创造长成一棵被看见的树" />
+<meta property="og:description" content="面向全国大学生的 AI 成长、实践与价值榜单。我们不奖励喧闹，我们记录那些正在真实发生的创造。" />
+<meta property="og:site_name" content="树成林 AI 榜" />
+<meta property="og:image" content="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'1200'%20height%3D'630'%3E%3Crect%20width%3D'1200'%20height%3D'630'%20fill%3D'%2310251B'%2F%3E%3Ctext%20x%3D'600'%20y%3D'320'%20font-size%3D'72'%20fill%3D'%23F3F5EF'%20text-anchor%3D'middle'%20font-family%3D'sans-serif'%3E树成林%20AI%20榜%3C%2Ftext%3E%3C%2Fsvg%3E" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="树成林 AI 榜" />
+<meta name="twitter:description" content="面向全国大学生的 AI 成长、实践与价值榜单。一人一树，众人成林。" />
+
+<!-- 内联 SVG favicon：一颗成长中的种子 -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='8'%20fill='%2310251B'/%3E%3Cpath%20d='M16%2026V14'%20stroke='%23B9DC76'%20stroke-width='2'%20stroke-linecap='round'/%3E%3Cpath%20d='M16%2016c-4%200-7-3-7-7%204%200%207%203%207%207z'%20fill='%23B9DC76'/%3E%3Cpath%20d='M16%2018c4%200%207-2%207-6-4%200-7%202-7%206z'%20fill='%235E7565'/%3E%3C/svg%3E" />
+
+<style>
+/* ============================================================
+   树成林 AI 榜 — 设计系统
+   配色、字体、栅格、基础组件
+   ============================================================ */
+:root{
+  /* 品牌色板 */
+  --forest-black:#10251B;   /* 森林黑绿 */
+  --pine-deep:#183D2C;      /* 深松绿 */
+  --moss:#5E7565;           /* 青苔绿 */
+  --sprout:#B9DC76;         /* 新生嫩绿 */
+  --dawn:#F3F5EF;           /* 晨光米白 */
+  --paper:#FAFBF8;          /* 纸张白 */
+  --sun-gold:#D6B76D;       /* 阳光金 */
+  --graphite:#161B18;       /* 石墨黑 */
+  --gray:#7C847E;           /* 辅助灰 */
+
+  /* 语义色 */
+  --bg:var(--paper);
+  --ink:#1B231E;
+  --ink-soft:#48514A;
+  --ink-faint:#7C847E;
+  --line:rgba(24,61,44,.10);
+  --line-strong:rgba(24,61,44,.18);
+  --card:#ffffff;
+  --card-2:#F6F8F2;
+  --accent:var(--pine-deep);
+  --accent-soft:rgba(24,61,44,.06);
+  --gold-soft:rgba(214,183,109,.16);
+  --sprout-soft:rgba(185,220,118,.22);
+
+  /* 阴影（极轻） */
+  --sh-1:0 1px 2px rgba(16,37,27,.04), 0 1px 3px rgba(16,37,27,.05);
+  --sh-2:0 6px 18px rgba(16,37,27,.06), 0 2px 6px rgba(16,37,27,.05);
+  --sh-3:0 18px 48px rgba(16,37,27,.12), 0 6px 16px rgba(16,37,27,.08);
+
+  /* 圆角 */
+  --r-s:12px; --r-m:18px; --r-l:24px; --r-xl:28px;
+
+  /* 栅格 */
+  --maxw:1440px;
+  --pad:clamp(20px,5vw,64px);
+
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{
+  font-family:var(--font);
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.6;
+  font-size:16px;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+img,svg{display:block;max-width:100%;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+a{color:inherit;text-decoration:none;}
+ul{list-style:none;}
+input,textarea,select{font-family:inherit;font-size:inherit;color:inherit;}
+:focus-visible{outline:2px solid var(--pine-deep);outline-offset:3px;border-radius:6px;}
+
+/* 容器 */
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad);}
+.section{padding:clamp(64px,9vw,128px) 0;}
+.section--tight{padding:clamp(48px,6vw,88px) 0;}
+
+/* 文本工具 */
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--moss);
+}
+.eyebrow::before{content:"";width:18px;height:1px;background:var(--moss);opacity:.6;}
+.h-display{font-size:clamp(38px,6.4vw,76px);line-height:1.04;font-weight:680;letter-spacing:-.02em;}
+.h1{font-size:clamp(30px,4.4vw,52px);line-height:1.1;font-weight:660;letter-spacing:-.02em;}
+.h2{font-size:clamp(24px,3vw,36px);line-height:1.18;font-weight:640;letter-spacing:-.01em;}
+.h3{font-size:clamp(19px,2vw,23px);line-height:1.3;font-weight:620;}
+.lead{font-size:clamp(17px,1.6vw,20px);color:var(--ink-soft);line-height:1.66;}
+.muted{color:var(--ink-faint);}
+.tiny{font-size:13px;}
+.mono-num{font-variant-numeric:tabular-nums;}
+
+.section-head{max-width:760px;margin-bottom:clamp(36px,5vw,64px);}
+.section-head .h2{margin:14px 0 16px;}
+
+/* 按钮 */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:13px 24px;border-radius:999px;font-size:15px;font-weight:600;
+  transition:transform .25s var(--ease),background .25s var(--ease),box-shadow .25s var(--ease),border-color .25s;
+  border:1px solid transparent;white-space:nowrap;
+}
+.btn:active{transform:translateY(1px) scale(.99);}
+.btn--primary{background:var(--pine-deep);color:var(--dawn);box-shadow:var(--sh-1);}
+.btn--primary:hover{background:var(--forest-black);box-shadow:var(--sh-2);transform:translateY(-1px);}
+.btn--ghost{background:transparent;color:var(--ink);border-color:var(--line-strong);}
+.btn--ghost:hover{background:var(--accent-soft);border-color:var(--accent);}
+.btn--light{background:rgba(255,255,255,.12);color:var(--dawn);border-color:rgba(255,255,255,.24);backdrop-filter:blur(6px);}
+.btn--light:hover{background:rgba(255,255,255,.2);}
+.btn--gold{background:var(--sun-gold);color:#3a2f12;}
+.btn--gold:hover{filter:brightness(1.04);transform:translateY(-1px);}
+.btn--sm{padding:9px 16px;font-size:13px;}
+.btn--block{width:100%;}
+.btn[disabled]{opacity:.5;cursor:not-allowed;}
+
+/* chip / 标签 */
+.chip{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:5px 12px;border-radius:999px;font-size:12.5px;font-weight:560;
+  background:var(--accent-soft);color:var(--accent);border:1px solid transparent;
+}
+.chip--line{background:transparent;border-color:var(--line-strong);color:var(--ink-soft);}
+.chip--gold{background:var(--gold-soft);color:#7d6422;}
+.chip--sprout{background:var(--sprout-soft);color:#3d5a23;}
+
+/* 卡片 */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-l);box-shadow:var(--sh-1);}
+
+/* 可访问隐藏 */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
+
+/* 滚动出现动画 */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+.reveal.in{opacity:1;transform:none;}
+
+/* ============================================================
+   导航
+   ============================================================ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  transition:background .3s var(--ease),box-shadow .3s var(--ease),border-color .3s;
+  border-bottom:1px solid transparent;
+}
+.nav.scrolled{
+  background:rgba(250,251,248,.82);
+  backdrop-filter:saturate(180%) blur(18px);
+  -webkit-backdrop-filter:saturate(180%) blur(18px);
+  border-bottom-color:var(--line);
+  box-shadow:0 1px 0 rgba(16,37,27,.02);
+}
+.nav-inner{display:flex;align-items:center;gap:18px;height:64px;}
+.brand{display:flex;align-items:center;gap:10px;font-weight:680;letter-spacing:-.01em;flex-shrink:0;}
+.brand-mark{width:30px;height:30px;flex-shrink:0;}
+.brand small{display:block;font-size:10px;font-weight:600;letter-spacing:.16em;color:var(--moss);}
+.nav-links{display:flex;align-items:center;gap:2px;margin-left:14px;flex:1;}
+.nav-links a{
+  padding:8px 12px;border-radius:999px;font-size:14.5px;font-weight:520;color:var(--ink-soft);
+  transition:color .2s,background .2s;
+}
+.nav-links a:hover{color:var(--ink);background:var(--accent-soft);}
+.nav-actions{display:flex;align-items:center;gap:8px;margin-left:auto;}
+.icon-btn{
+  width:40px;height:40px;border-radius:999px;display:grid;place-items:center;
+  color:var(--ink-soft);transition:background .2s,color .2s;
+}
+.icon-btn:hover{background:var(--accent-soft);color:var(--ink);}
+.nav-toggle{display:none;}
+
+/* 移动端抽屉导航 */
+.mobile-menu{
+  position:fixed;inset:0;z-index:120;background:rgba(16,37,27,.5);
+  backdrop-filter:blur(6px);opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;
+}
+.mobile-menu.open{opacity:1;visibility:visible;}
+.mobile-panel{
+  position:absolute;top:0;right:0;bottom:0;width:min(86vw,360px);
+  background:var(--paper);padding:24px;display:flex;flex-direction:column;gap:6px;
+  transform:translateX(100%);transition:transform .36s var(--ease);overflow-y:auto;
+}
+.mobile-menu.open .mobile-panel{transform:none;}
+.mobile-panel a{padding:14px 12px;border-radius:12px;font-size:17px;font-weight:560;border-bottom:1px solid var(--line);}
+.mobile-panel a:hover{background:var(--accent-soft);}
+
+/* ============================================================
+   Hero / 森林主视觉
+   ============================================================ */
+.hero{
+  position:relative;min-height:100svh;display:flex;align-items:center;
+  padding-top:64px;overflow:hidden;
+  background:
+    radial-gradient(120% 80% at 82% 8%, rgba(214,183,109,.20), transparent 46%),
+    radial-gradient(120% 90% at 18% 100%, rgba(24,61,44,.10), transparent 55%),
+    linear-gradient(180deg, #F7F9F3 0%, #EEF3E7 58%, #E4EBDA 100%);
+}
+.hero-forest{position:absolute;inset:0;z-index:0;pointer-events:none;}
+.hero-forest svg{width:100%;height:100%;}
+.hero-fog{
+  position:absolute;left:0;right:0;bottom:0;height:42%;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,transparent,rgba(247,249,243,.0) 10%,rgba(244,247,238,.55) 70%,rgba(244,247,238,.9));
+}
+.hero-content{position:relative;z-index:2;max-width:780px;padding:48px 0;}
+.hero h1{margin:18px 0 22px;}
+.hero h1 .accent{
+  background:linear-gradient(120deg,var(--pine-deep),var(--moss) 70%,var(--sun-gold));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero .lead{max-width:560px;}
+.hero-sub{margin-top:8px;font-size:15px;color:var(--moss);font-weight:560;}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin:34px 0 18px;}
+.hero-note{
+  display:inline-flex;align-items:center;gap:10px;margin-top:10px;
+  font-size:13.5px;color:var(--ink-faint);
+}
+.hero-note b{color:var(--pine-deep);font-weight:620;}
+
+/* 漂浮叶片 */
+.leaf{position:absolute;z-index:1;opacity:.0;animation:floatLeaf linear infinite;will-change:transform,opacity;}
+@keyframes floatLeaf{
+  0%{opacity:0;transform:translateY(0) translateX(0) rotate(0deg);}
+  10%{opacity:.55;}
+  90%{opacity:.4;}
+  100%{opacity:0;transform:translateY(-120px) translateX(40px) rotate(140deg);}
+}
+
+/* 滚动提示 */
+.scroll-hint{
+  position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--moss);font-size:12px;letter-spacing:.1em;
+}
+.scroll-hint .dot{width:5px;height:5px;border-radius:50%;background:var(--moss);animation:scrollDot 1.8s var(--ease) infinite;}
+@keyframes scrollDot{0%,100%{opacity:.3;transform:translateY(0);}50%{opacity:1;transform:translateY(7px);}}
+
+/* ============================================================
+   社群数据
+   ============================================================ */
+.stats{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--paper);}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border-radius:var(--r-l);overflow:hidden;}
+.stat{background:var(--paper);padding:30px 26px;}
+.stat .num{font-size:clamp(30px,3.6vw,44px);font-weight:700;letter-spacing:-.02em;color:var(--pine-deep);}
+.stat .num small{font-size:.5em;font-weight:600;color:var(--moss);margin-left:3px;}
+.stat .label{margin-top:6px;font-size:14px;color:var(--ink-soft);font-weight:520;}
+.stat .sub{font-size:12.5px;color:var(--ink-faint);margin-top:2px;}
+
+/* ============================================================
+   通用网格
+   ============================================================ */
+.grid{display:grid;gap:20px;}
+.grid-2{grid-template-columns:repeat(2,1fr);}
+.grid-3{grid-template-columns:repeat(3,1fr);}
+.grid-4{grid-template-columns:repeat(4,1fr);}
+
+/* ============================================================
+   本期领航树（Top 3）
+   ============================================================ */
+.podium{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:end;}
+.tree-card{
+  position:relative;background:linear-gradient(180deg,var(--card),var(--card-2));
+  border:1px solid var(--line);border-radius:var(--r-xl);padding:26px 24px 24px;
+  box-shadow:var(--sh-1);transition:transform .35s var(--ease),box-shadow .35s var(--ease);
+  overflow:hidden;
+}
+.tree-card:hover{transform:translateY(-6px);box-shadow:var(--sh-3);}
+.tree-card .rank-name{font-size:12.5px;font-weight:640;letter-spacing:.06em;color:var(--moss);}
+.tree-card .tree-svg{height:150px;display:grid;place-items:end center;margin:8px 0 14px;}
+.tree-card .score-big{font-size:38px;font-weight:720;letter-spacing:-.02em;color:var(--pine-deep);}
+.tree-card .who{display:flex;align-items:center;gap:12px;margin:10px 0;}
+.tree-card.is-1{transform:translateY(-18px);}
+.tree-card.is-1:hover{transform:translateY(-24px);}
+.tree-card .crownless{
+  display:inline-flex;font-size:12px;font-weight:620;padding:4px 10px;border-radius:999px;
+  background:var(--sprout-soft);color:#3d5a23;margin-bottom:6px;
+}
+.tree-card.is-1 .crownless{background:var(--gold-soft);color:#7d6422;}
+.avatar{
+  width:48px;height:48px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;
+  font-weight:700;color:#fff;font-size:18px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.25);
+}
+.avatar--sm{width:38px;height:38px;font-size:15px;}
+.avatar--lg{width:76px;height:76px;font-size:28px;}
+
+/* ============================================================
+   榜单 / Leaderboard
+   ============================================================ */
+.board-tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:8px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;}
+.board-tabs::-webkit-scrollbar{height:4px;}
+.board-tabs::-webkit-scrollbar-thumb{background:var(--line-strong);border-radius:4px;}
+.tab{
+  flex-shrink:0;padding:9px 16px;border-radius:999px;font-size:14px;font-weight:560;
+  color:var(--ink-soft);border:1px solid var(--line);background:var(--card);transition:all .22s var(--ease);
+}
+.tab:hover{border-color:var(--accent);color:var(--ink);}
+.tab.active{background:var(--pine-deep);color:var(--dawn);border-color:var(--pine-deep);}
+.board-toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:18px 0;}
+.subtabs{display:flex;gap:6px;flex-wrap:wrap;}
+.subtab{padding:6px 12px;border-radius:999px;font-size:12.5px;font-weight:540;background:var(--card-2);color:var(--ink-soft);border:1px solid transparent;transition:all .2s;}
+.subtab:hover{border-color:var(--line-strong);}
+.subtab.active{background:var(--accent-soft);color:var(--accent);border-color:var(--accent);}
+.field{
+  display:flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;
+  background:var(--card);border:1px solid var(--line);transition:border-color .2s,box-shadow .2s;
+}
+.field:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft);}
+.field input{border:none;outline:none;background:none;width:170px;max-width:48vw;}
+.field svg{color:var(--ink-faint);flex-shrink:0;}
+.selectish{position:relative;}
+.selectish select{
+  appearance:none;-webkit-appearance:none;padding:9px 34px 9px 14px;border-radius:999px;
+  background:var(--card);border:1px solid var(--line);font-size:13.5px;font-weight:520;color:var(--ink-soft);cursor:pointer;
+}
+.selectish::after{content:"";position:absolute;right:14px;top:50%;width:7px;height:7px;border-right:2px solid var(--ink-faint);border-bottom:2px solid var(--ink-faint);transform:translateY(-70%) rotate(45deg);pointer-events:none;}
+
+.board-list{display:flex;flex-direction:column;gap:10px;}
+.row{
+  display:grid;grid-template-columns:54px 1fr auto;gap:16px;align-items:center;
+  padding:16px 20px;border-radius:var(--r-m);background:var(--card);border:1px solid var(--line);
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s;cursor:pointer;
+  animation:rowIn .5s var(--ease) both;
+}
+@keyframes rowIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+.row:hover{transform:translateY(-2px);box-shadow:var(--sh-2);border-color:var(--line-strong);}
+.row-rank{display:flex;flex-direction:column;align-items:center;gap:2px;}
+.row-rank .n{font-size:22px;font-weight:720;letter-spacing:-.02em;color:var(--ink);font-variant-numeric:tabular-nums;}
+.delta{font-size:11px;font-weight:640;display:inline-flex;align-items:center;gap:2px;}
+.delta.up{color:#3f7a45;}
+.delta.same{color:var(--gray);}
+.delta.charge{color:var(--moss);}
+.row-main{min-width:0;}
+.row-id{display:flex;align-items:center;gap:12px;}
+.row-id .name{font-weight:640;font-size:16px;}
+.row-meta{font-size:12.5px;color:var(--ink-faint);margin-top:1px;display:flex;flex-wrap:wrap;gap:8px;}
+.row-proj{font-size:13.5px;color:var(--ink-soft);margin-top:7px;}
+.row-proj b{color:var(--ink);font-weight:600;}
+.row-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px;}
+.row-side{display:flex;flex-direction:column;align-items:flex-end;gap:8px;text-align:right;}
+.row-score{font-size:26px;font-weight:720;letter-spacing:-.02em;color:var(--pine-deep);font-variant-numeric:tabular-nums;}
+.row-score small{font-size:11px;color:var(--ink-faint);font-weight:560;display:block;text-align:right;margin-top:-2px;}
+.row-quick{display:flex;gap:6px;}
+.minibtn{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--card-2);color:var(--ink-soft);transition:all .2s;}
+.minibtn:hover{background:var(--accent-soft);color:var(--accent);}
+.minibtn.on{background:var(--gold-soft);color:#7d6422;}
+.cert{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:600;color:var(--moss);}
+.empty{padding:48px;text-align:center;color:var(--ink-faint);}
+.board-foot{margin-top:18px;text-align:center;}
+
+/* ============================================================
+   AI 生长舱 / 表单 + 报告
+   ============================================================ */
+.lab{background:linear-gradient(180deg,#0E2419,#13301F 60%,#10251B);color:var(--dawn);border-radius:var(--r-xl);overflow:hidden;}
+.lab-inner{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+.lab-form{padding:clamp(28px,4vw,48px);}
+.lab-form .eyebrow{color:var(--sprout);}
+.lab-form .eyebrow::before{background:var(--sprout);}
+.lab-form h2{color:var(--dawn);margin:14px 0 8px;}
+.lab-form .lead{color:rgba(243,245,239,.72);font-size:16px;margin-bottom:24px;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.fg{display:flex;flex-direction:column;gap:6px;}
+.fg.full{grid-column:1/-1;}
+.fg label{font-size:12.5px;font-weight:600;color:var(--sprout);letter-spacing:.02em;}
+.fg label .opt{color:rgba(243,245,239,.4);font-weight:500;}
+.inp,.ta,.sel{
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:12px;
+  padding:11px 14px;color:var(--dawn);font-size:14.5px;transition:border-color .2s,background .2s;width:100%;
+}
+.inp::placeholder,.ta::placeholder{color:rgba(243,245,239,.36);}
+.inp:focus,.ta:focus,.sel:focus{outline:none;border-color:var(--sprout);background:rgba(255,255,255,.1);}
+.ta{resize:vertical;min-height:74px;line-height:1.55;}
+.sel{appearance:none;-webkit-appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%23B9DC76' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:34px;}
+.sel option{color:#1B231E;}
+.dropzone{
+  grid-column:1/-1;border:1.5px dashed rgba(255,255,255,.22);border-radius:14px;padding:18px;
+  text-align:center;color:rgba(243,245,239,.62);font-size:13.5px;cursor:pointer;transition:border-color .2s,background .2s;
+}
+.dropzone:hover{border-color:var(--sprout);background:rgba(255,255,255,.04);}
+.dz-preview{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+.dz-thumb{position:relative;width:62px;height:62px;border-radius:10px;overflow:hidden;background:rgba(255,255,255,.08);display:grid;place-items:center;font-size:10px;color:rgba(243,245,239,.6);}
+.dz-thumb img{width:100%;height:100%;object-fit:cover;}
+.range-row{display:flex;align-items:center;gap:12px;}
+.range-row input[type=range]{flex:1;accent-color:var(--sprout);}
+.range-val{font-weight:700;color:var(--sprout);min-width:42px;text-align:right;font-variant-numeric:tabular-nums;}
+.lab-disclaim{font-size:12px;color:rgba(243,245,239,.55);margin-top:16px;display:flex;gap:8px;align-items:flex-start;}
+
+/* 报告侧 */
+.lab-report{background:rgba(255,255,255,.03);padding:clamp(28px,4vw,48px);border-left:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column;}
+.report-empty{margin:auto;text-align:center;color:rgba(243,245,239,.6);max-width:300px;}
+.report-empty .seed-anim{width:90px;height:90px;margin:0 auto 18px;}
+.scoring{display:none;margin:auto;text-align:center;}
+.scoring.show{display:block;}
+.scoring .ring{width:120px;height:120px;margin:0 auto 18px;}
+.scoring .step{font-size:14px;color:var(--sprout);min-height:22px;font-weight:560;}
+.report{display:none;}
+.report.show{display:block;animation:fadeUp .6s var(--ease) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+.report .score-hero{display:flex;align-items:center;gap:20px;margin-bottom:22px;}
+.report .score-hero .big{font-size:60px;font-weight:760;letter-spacing:-.03em;color:var(--sprout);line-height:1;font-variant-numeric:tabular-nums;}
+.report .score-hero .cap{font-size:13px;color:rgba(243,245,239,.7);}
+.conf{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:4px 10px;border-radius:999px;background:rgba(185,220,118,.16);color:var(--sprout);margin-top:6px;}
+.dimbar{margin:10px 0;}
+.dimbar .dt{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px;color:rgba(243,245,239,.82);}
+.dimbar .dt b{color:var(--dawn);font-variant-numeric:tabular-nums;}
+.track{height:7px;border-radius:999px;background:rgba(255,255,255,.1);overflow:hidden;}
+.track > i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--moss),var(--sprout));width:0;transition:width 1s var(--ease);}
+.report-block{margin-top:20px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);}
+.report-block h4{font-size:13px;font-weight:640;color:var(--sprout);margin-bottom:10px;letter-spacing:.03em;}
+.tag-list{display:flex;flex-wrap:wrap;gap:7px;}
+.tag-list .t{font-size:12.5px;padding:5px 11px;border-radius:999px;background:rgba(255,255,255,.07);color:rgba(243,245,239,.86);}
+.tag-list .t.warn{background:rgba(214,183,109,.16);color:var(--sun-gold);}
+.fitlist{display:flex;flex-direction:column;gap:8px;}
+.fititem{display:flex;justify-content:space-between;align-items:center;font-size:13.5px;padding:9px 12px;border-radius:10px;background:rgba(255,255,255,.05);}
+.fititem b{color:var(--sprout);}
+.actionlist{counter-reset:a;display:flex;flex-direction:column;gap:9px;}
+.actionlist li{position:relative;padding:11px 12px 11px 40px;border-radius:10px;background:rgba(255,255,255,.05);font-size:13.5px;color:rgba(243,245,239,.9);}
+.actionlist li::before{counter-increment:a;content:counter(a);position:absolute;left:11px;top:11px;width:20px;height:20px;border-radius:50%;background:var(--sprout);color:#16301f;font-weight:720;font-size:12px;display:grid;place-items:center;}
+
+/* ============================================================
+   AI 评审官 + 权重
+   ============================================================ */
+.judge-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:start;}
+.weight-card{padding:28px;}
+.weight-row{display:flex;align-items:center;gap:14px;margin:16px 0;}
+.weight-row .wt-label{width:140px;flex-shrink:0;font-size:14px;font-weight:560;}
+.weight-row .wt-label small{display:block;color:var(--ink-faint);font-weight:500;font-size:11.5px;}
+.weight-bar{flex:1;height:10px;border-radius:999px;background:var(--card-2);overflow:hidden;}
+.weight-bar > i{display:block;height:100%;border-radius:999px;width:0;transition:width 1.1s var(--ease);}
+.weight-row .wt-pct{font-weight:720;font-size:16px;width:46px;text-align:right;color:var(--pine-deep);}
+.judge-points{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;}
+.jp{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;color:var(--ink-soft);padding:10px;border-radius:12px;background:var(--card-2);}
+.jp svg{flex-shrink:0;color:var(--moss);margin-top:1px;}
+.persona{padding:22px;border-radius:var(--r-l);background:linear-gradient(135deg,var(--accent-soft),transparent);border:1px solid var(--line);margin-top:18px;}
+.persona .q{font-size:16px;font-weight:600;line-height:1.5;}
+
+/* ============================================================
+   模拟冲榜
+   ============================================================ */
+.rush{background:linear-gradient(135deg,#13301F,#0E2419);color:var(--dawn);border-radius:var(--r-xl);padding:clamp(28px,4vw,48px);}
+.rush .eyebrow{color:var(--sprout);}.rush .eyebrow::before{background:var(--sprout);}
+.rush h2{color:var(--dawn);}
+.rush-grid{display:grid;grid-template-columns:300px 1fr;gap:28px;margin-top:26px;align-items:start;}
+.rush-now{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-l);padding:24px;text-align:center;}
+.rush-now .label{font-size:13px;color:rgba(243,245,239,.7);}
+.rush-now .rk{font-size:54px;font-weight:760;color:var(--sprout);letter-spacing:-.02em;line-height:1.1;}
+.rush-now .target{font-size:13px;color:rgba(243,245,239,.8);margin-top:10px;padding-top:14px;border-top:1px solid rgba(255,255,255,.1);}
+.rush-meta{display:flex;justify-content:space-between;margin-top:14px;font-size:12px;color:rgba(243,245,239,.66);}
+.task{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:14px;background:rgba(255,255,255,.05);margin-bottom:10px;transition:background .2s;}
+.task:hover{background:rgba(255,255,255,.08);}
+.task-check{width:24px;height:24px;border-radius:8px;border:1.5px solid rgba(255,255,255,.3);flex-shrink:0;display:grid;place-items:center;cursor:pointer;transition:all .2s;}
+.task-check.done{background:var(--sprout);border-color:var(--sprout);}
+.task-body{flex:1;min-width:0;}
+.task-body .tt{font-size:14px;font-weight:540;}
+.task-body .ts{font-size:12px;color:rgba(243,245,239,.6);}
+.task-gain{font-weight:720;color:var(--sprout);font-size:15px;white-space:nowrap;}
+.rush-proj{margin-top:8px;padding:14px 16px;border-radius:12px;background:rgba(185,220,118,.12);font-size:13.5px;color:var(--sprout);text-align:center;}
+
+/* ============================================================
+   潜力森林
+   ============================================================ */
+.rec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.rec-card{padding:22px;display:flex;flex-direction:column;gap:14px;transition:transform .3s var(--ease),box-shadow .3s var(--ease);cursor:pointer;}
+.rec-card:hover{transform:translateY(-4px);box-shadow:var(--sh-2);}
+.rec-why{display:flex;gap:9px;align-items:flex-start;padding:12px;border-radius:12px;background:var(--sprout-soft);font-size:13px;color:#3d5a23;line-height:1.5;}
+.rec-why svg{flex-shrink:0;margin-top:1px;}
+.rec-foot{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:12px;border-top:1px solid var(--line);}
+
+/* ============================================================
+   作品森林
+   ============================================================ */
+.forest-filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;}
+.forest-stage{
+  position:relative;border-radius:var(--r-xl);overflow:hidden;
+  background:linear-gradient(180deg,#EAF0E0,#DCE6CE 70%,#CFE0BB);
+  border:1px solid var(--line);min-height:340px;padding:24px;
+}
+.forest-ground{position:absolute;left:0;right:0;bottom:0;height:60px;background:linear-gradient(180deg,transparent,rgba(24,61,44,.12));}
+.forest-trees{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:center;gap:6px;position:relative;z-index:1;min-height:300px;}
+.ftree{position:relative;cursor:pointer;transition:transform .3s var(--ease),filter .3s;filter:drop-shadow(0 6px 8px rgba(16,37,27,.12));align-self:flex-end;}
+.ftree:hover{transform:translateY(-6px) scale(1.04);filter:drop-shadow(0 12px 16px rgba(16,37,27,.2));}
+.ftree:focus-visible{outline:2px solid var(--pine-deep);outline-offset:4px;}
+.forest-legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:16px;font-size:12.5px;color:var(--ink-soft);}
+.forest-legend span{display:inline-flex;align-items:center;gap:6px;}
+.lg-dot{width:10px;height:10px;border-radius:3px;}
+
+/* ============================================================
+   城市林 / 高校林
+   ============================================================ */
+.cs-toggle{display:inline-flex;background:var(--card-2);border-radius:999px;padding:4px;gap:4px;margin-bottom:24px;}
+.cs-toggle button{padding:8px 20px;border-radius:999px;font-size:14px;font-weight:560;color:var(--ink-soft);transition:all .2s;}
+.cs-toggle button.active{background:var(--card);color:var(--ink);box-shadow:var(--sh-1);}
+.place-card{padding:24px;transition:transform .3s var(--ease),box-shadow .3s var(--ease);}
+.place-card:hover{transform:translateY(-4px);box-shadow:var(--sh-2);}
+.place-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.place-canopy{width:46px;height:46px;}
+.place-metrics{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0;}
+.pm{background:var(--card-2);border-radius:12px;padding:12px;}
+.pm .n{font-size:22px;font-weight:720;color:var(--pine-deep);}
+.pm .l{font-size:12px;color:var(--ink-faint);}
+.place-kw{display:flex;flex-wrap:wrap;gap:6px;}
+
+/* ============================================================
+   成长等级 + 勋章
+   ============================================================ */
+.levels{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin-bottom:32px;}
+.level{text-align:center;padding:18px 8px;border-radius:var(--r-m);background:var(--card);border:1px solid var(--line);position:relative;transition:transform .25s var(--ease);}
+.level:hover{transform:translateY(-3px);box-shadow:var(--sh-1);}
+.level .ic{width:40px;height:40px;margin:0 auto 8px;}
+.level .nm{font-size:13.5px;font-weight:600;}
+.level .st{font-size:11px;color:var(--ink-faint);}
+.level .seq{position:absolute;top:8px;left:10px;font-size:11px;font-weight:700;color:var(--moss);}
+.badge-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;}
+.badge{padding:18px 14px;text-align:center;border-radius:var(--r-m);background:var(--card);border:1px solid var(--line);cursor:pointer;transition:transform .25s var(--ease),box-shadow .25s var(--ease);}
+.badge:hover{transform:translateY(-4px);box-shadow:var(--sh-2);}
+.badge .ic{width:54px;height:54px;margin:0 auto 10px;}
+.badge .nm{font-size:14px;font-weight:620;}
+.badge .ds{font-size:11.5px;color:var(--ink-faint);margin-top:3px;line-height:1.4;}
+.badge .rare{display:inline-block;margin-top:8px;font-size:10.5px;font-weight:640;padding:2px 9px;border-radius:999px;}
+.rare.r1{background:var(--accent-soft);color:var(--moss);}
+.rare.r2{background:var(--sprout-soft);color:#3d5a23;}
+.rare.r3{background:var(--gold-soft);color:#7d6422;}
+
+/* ============================================================
+   社会价值
+   ============================================================ */
+.story-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+.story{padding:26px;display:flex;flex-direction:column;gap:14px;transition:transform .3s var(--ease),box-shadow .3s var(--ease);}
+.story:hover{transform:translateY(-4px);box-shadow:var(--sh-2);}
+.story .topic{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:620;color:var(--moss);}
+.story .q{font-size:18px;font-weight:620;line-height:1.4;}
+.story dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:13.5px;}
+.story dt{color:var(--moss);font-weight:600;white-space:nowrap;}
+.story dd{color:var(--ink-soft);}
+.story .need{padding:12px;border-radius:12px;background:var(--card-2);font-size:13px;color:var(--ink-soft);}
+
+/* ============================================================
+   公平规则 + 透明中心
+   ============================================================ */
+.fair{background:var(--forest-black);color:var(--dawn);border-radius:var(--r-xl);padding:clamp(28px,4vw,52px);}
+.fair .eyebrow{color:var(--sprout);}.fair .eyebrow::before{background:var(--sprout);}
+.fair h2{color:var(--dawn);}
+.principles{display:grid;grid-template-columns:repeat(2,1fr);gap:10px 28px;margin-top:24px;}
+.principle{display:flex;gap:12px;align-items:flex-start;font-size:14px;color:rgba(243,245,239,.86);padding:6px 0;}
+.principle .pn{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:rgba(185,220,118,.16);color:var(--sprout);font-weight:700;font-size:12.5px;display:grid;place-items:center;}
+.anti-bias{margin-top:26px;padding:20px 24px;border-radius:var(--r-l);background:rgba(185,220,118,.1);border:1px solid rgba(185,220,118,.2);font-size:16px;line-height:1.6;color:var(--dawn);}
+
+.trans-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px;}
+.trans{padding:18px;border-radius:var(--r-m);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);}
+.trans .n{font-size:26px;font-weight:720;color:var(--sprout);font-variant-numeric:tabular-nums;}
+.trans .l{font-size:12.5px;color:rgba(243,245,239,.72);margin-top:3px;}
+.trans-meta{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:18px;font-size:12.5px;color:rgba(243,245,239,.6);}
+.trans-meta b{color:rgba(243,245,239,.85);font-weight:600;}
+
+/* ============================================================
+   加入 / CTA 区
+   ============================================================ */
+.join{text-align:center;}
+.join .h1{margin:14px auto 16px;max-width:680px;}
+.join-cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:28px;}
+
+/* ============================================================
+   页尾
+   ============================================================ */
+.footer{background:linear-gradient(180deg,#10251B,#0B1B13);color:var(--dawn);position:relative;overflow:hidden;}
+.footer-forest{position:absolute;left:0;right:0;bottom:0;height:160px;opacity:.5;}
+.footer-inner{position:relative;z-index:1;padding:clamp(56px,8vw,96px) 0 36px;}
+.footer-lead{max-width:560px;}
+.footer-lead .h1{color:var(--dawn);}
+.footer-lead p{color:rgba(243,245,239,.7);margin-top:14px;}
+.footer-cta{display:flex;flex-wrap:wrap;gap:12px;margin:30px 0;}
+.footer-cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:28px;padding-top:40px;margin-top:40px;border-top:1px solid rgba(255,255,255,.12);}
+.footer-cols h5{font-size:13px;color:var(--sprout);margin-bottom:14px;letter-spacing:.04em;}
+.footer-cols a,.footer-cols li{display:block;font-size:13.5px;color:rgba(243,245,239,.66);padding:5px 0;transition:color .2s;}
+.footer-cols a:hover{color:var(--dawn);}
+.footer-brand .h3{color:var(--dawn);}
+.footer-brand p{color:rgba(243,245,239,.6);font-size:13.5px;margin-top:8px;max-width:300px;}
+.footer-bottom{margin-top:36px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);font-size:12.5px;color:rgba(243,245,239,.5);display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;}
+.footer-poem{text-align:center;padding:40px 0 0;color:rgba(243,245,239,.78);font-size:15px;line-height:2;}
+
+/* ============================================================
+   弹窗 / 抽屉 / 通用 overlay
+   ============================================================ */
+.overlay{position:fixed;inset:0;z-index:200;display:flex;background:rgba(11,27,19,.5);backdrop-filter:blur(8px);opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;padding:16px;}
+.overlay.open{opacity:1;visibility:visible;}
+.overlay--center{align-items:center;justify-content:center;}
+.overlay--right{justify-content:flex-end;padding:0;}
+
+.modal{
+  background:var(--paper);border-radius:var(--r-xl);max-width:560px;width:100%;max-height:90vh;overflow-y:auto;
+  box-shadow:var(--sh-3);transform:translateY(20px) scale(.98);transition:transform .36s var(--ease);position:relative;
+}
+.overlay.open .modal{transform:none;}
+.modal--wide{max-width:760px;}
+
+.drawer{
+  background:var(--paper);width:min(94vw,520px);height:100%;overflow-y:auto;box-shadow:var(--sh-3);
+  transform:translateX(100%);transition:transform .4s var(--ease);position:relative;
+}
+.overlay.open .drawer{transform:none;}
+
+.modal-x,.drawer-x{position:absolute;top:16px;right:16px;z-index:5;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.7);backdrop-filter:blur(6px);display:grid;place-items:center;color:var(--ink-soft);transition:background .2s,transform .2s;}
+.modal-x:hover,.drawer-x:hover{background:var(--card-2);transform:rotate(90deg);}
+.modal-pad{padding:clamp(24px,4vw,36px);}
+
+/* 抽屉头部（人物详情/个人主页） */
+.drawer-hero{padding:32px clamp(24px,4vw,36px) 24px;background:linear-gradient(160deg,#13301F,#10251B);color:var(--dawn);}
+.drawer-hero .who{display:flex;gap:16px;align-items:center;}
+.drawer-hero .nm{font-size:24px;font-weight:680;}
+.drawer-hero .meta{font-size:13px;color:rgba(243,245,239,.72);margin-top:3px;}
+.drawer-hero .level-pill{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:12.5px;font-weight:600;padding:5px 12px;border-radius:999px;background:rgba(185,220,118,.16);color:var(--sprout);}
+.drawer-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.1);border-radius:14px;overflow:hidden;margin-top:20px;}
+.drawer-stats .s{background:#10251B;padding:12px 8px;text-align:center;}
+.drawer-stats .s .n{font-size:18px;font-weight:720;color:var(--sprout);}
+.drawer-stats .s .l{font-size:10.5px;color:rgba(243,245,239,.6);margin-top:2px;}
+.drawer-body{padding:clamp(20px,4vw,32px);}
+.dsec{margin-bottom:24px;}
+.dsec h4{font-size:13px;font-weight:660;color:var(--moss);letter-spacing:.04em;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;font-size:13.5px;}
+.kv dt{color:var(--ink-faint);}
+.kv dd{color:var(--ink);font-weight:520;}
+.badge-mini-wall{display:flex;flex-wrap:wrap;gap:8px;}
+.badge-mini{display:flex;align-items:center;gap:6px;font-size:12px;padding:6px 11px;border-radius:999px;background:var(--card);border:1px solid var(--line);}
+.badge-mini svg{width:18px;height:18px;}
+.feedback{padding:12px 14px;border-radius:12px;background:var(--card);border:1px solid var(--line);font-size:13px;color:var(--ink-soft);margin-bottom:8px;}
+.feedback .by{font-size:11.5px;color:var(--ink-faint);margin-top:4px;}
+.rings{display:flex;gap:4px;align-items:flex-end;height:54px;}
+.rings i{width:7px;border-radius:4px 4px 0 0;background:linear-gradient(180deg,var(--sprout),var(--moss));}
+
+/* AI 评分详情卡（评审官弹窗 / 评分标准） */
+.crit{border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:10px;background:var(--card);}
+.crit-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+.crit-head .cn{font-weight:620;font-size:14.5px;}
+.crit-head .cs{font-weight:720;color:var(--pine-deep);font-variant-numeric:tabular-nums;}
+.crit .reason{font-size:13px;color:var(--ink-soft);}
+.crit .evid{font-size:12px;color:var(--ink-faint);margin-top:6px;padding-left:12px;border-left:2px solid var(--line-strong);}
+.audit{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 18px;font-size:12.5px;margin-top:14px;padding:14px;border-radius:12px;background:var(--card-2);}
+.audit div{display:flex;justify-content:space-between;}
+.audit b{color:var(--ink);}
+
+/* 投票弹窗 */
+.vote-rules{display:flex;flex-direction:column;gap:8px;margin:16px 0;}
+.vote-rule{display:flex;gap:9px;font-size:13px;color:var(--ink-soft);align-items:flex-start;}
+.vote-rule svg{flex-shrink:0;color:var(--moss);margin-top:2px;}
+.reason-opts{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;}
+.reason-opt{padding:8px 13px;border-radius:999px;border:1px solid var(--line);font-size:13px;cursor:pointer;transition:all .2s;background:var(--card);}
+.reason-opt:hover{border-color:var(--accent);}
+.reason-opt.sel{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);font-weight:560;}
+
+/* 分享卡片 */
+.share-card{border-radius:var(--r-l);overflow:hidden;background:linear-gradient(160deg,#13301F,#10251B);color:var(--dawn);padding:28px;position:relative;}
+.share-card .sc-brand{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--sprout);font-weight:600;letter-spacing:.1em;}
+.share-card .sc-name{font-size:24px;font-weight:700;margin-top:18px;}
+.share-card .sc-proj{font-size:15px;color:rgba(243,245,239,.84);margin-top:4px;}
+.share-card .sc-stats{display:flex;gap:24px;margin:20px 0;}
+.share-card .sc-stats .v{font-size:24px;font-weight:720;color:var(--sprout);}
+.share-card .sc-stats .k{font-size:11.5px;color:rgba(243,245,239,.66);}
+.share-card .sc-quote{font-size:13.5px;line-height:1.6;color:rgba(243,245,239,.86);border-left:2px solid var(--sprout);padding-left:12px;margin:14px 0;}
+.share-card .sc-foot{display:flex;justify-content:space-between;align-items:flex-end;margin-top:20px;}
+.sc-qr{width:64px;height:64px;border-radius:10px;background:rgba(255,255,255,.92);display:grid;place-items:center;}
+.share-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;}
+.share-note{font-size:12px;color:var(--ink-faint);text-align:center;margin-top:12px;}
+
+/* Toast */
+.toast-wrap{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);z-index:400;display:flex;flex-direction:column;gap:10px;align-items:center;pointer-events:none;}
+.toast{
+  display:flex;align-items:center;gap:10px;background:var(--forest-black);color:var(--dawn);
+  padding:12px 20px;border-radius:999px;box-shadow:var(--sh-3);font-size:14px;font-weight:520;
+  transform:translateY(20px);opacity:0;transition:transform .35s var(--ease),opacity .35s;max-width:90vw;
+}
+.toast.show{transform:none;opacity:1;}
+.toast svg{color:var(--sprout);flex-shrink:0;}
+
+/* 新叶生长动效（投票成功 / 积分） */
+.newleaf{position:fixed;z-index:500;pointer-events:none;animation:leafGrow 1.1s var(--ease) forwards;}
+@keyframes leafGrow{0%{opacity:0;transform:scale(.2) rotate(-30deg);}30%{opacity:1;}100%{opacity:0;transform:scale(1.4) translateY(-60px) rotate(20deg);}}
+
+/* ============================================================
+   响应式
+   ============================================================ */
+@media(max-width:1080px){
+  .nav-links{display:none;}
+  .nav-toggle{display:grid;}
+  .lab-inner{grid-template-columns:1fr;}
+  .lab-report{border-left:none;border-top:1px solid rgba(255,255,255,.08);}
+  .judge-grid{grid-template-columns:1fr;}
+  .rush-grid{grid-template-columns:1fr;}
+  .rec-grid{grid-template-columns:repeat(2,1fr);}
+  .footer-cols{grid-template-columns:1fr 1fr;}
+  .trans-grid{grid-template-columns:repeat(2,1fr);}
+  .levels{grid-template-columns:repeat(4,1fr);}
+}
+@media(max-width:760px){
+  .stats-grid{grid-template-columns:repeat(2,1fr);}
+  .podium{grid-template-columns:1fr;}
+  .tree-card.is-1{transform:none;}
+  .tree-card.is-1:hover{transform:translateY(-6px);}
+  .grid-2,.grid-3,.grid-4{grid-template-columns:1fr;}
+  .form-grid{grid-template-columns:1fr;}
+  .rec-grid{grid-template-columns:1fr;}
+  .story-grid{grid-template-columns:1fr;}
+  .principles{grid-template-columns:1fr;}
+  .row{grid-template-columns:44px 1fr;gap:12px;padding:14px;}
+  .row-side{grid-column:2;flex-direction:row;align-items:center;justify-content:space-between;width:100%;margin-top:4px;}
+  .levels{grid-template-columns:repeat(2,1fr);}
+  .footer-cols{grid-template-columns:1fr;}
+  .judge-points{grid-template-columns:1fr;}
+  .section{padding:56px 0;}
+}
+@media(max-width:420px){
+  .stats-grid{grid-template-columns:1fr;}
+  .trans-grid{grid-template-columns:1fr;}
+}
+
+/* 降低动效 */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important;}
+  .reveal{opacity:1!important;transform:none!important;}
+  .leaf,.scroll-hint{display:none!important;}
+}
+</style>
+</head>
+<body>
+<a href="#main" class="sr-only">跳到主要内容</a>
+
+<!-- ============ 导航 ============ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand" aria-label="树成林 AI 榜 首页">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+        <rect width="32" height="32" rx="8" fill="#10251B"/>
+        <path d="M16 27V13" stroke="#B9DC76" stroke-width="2" stroke-linecap="round"/>
+        <path d="M16 15c-4 0-7-3-7-7 4 0 7 3 7 7z" fill="#B9DC76"/>
+        <path d="M16 17c4 0 7-2 7-6-4 0-7 2-7 6z" fill="#5E7565"/>
+      </svg>
+      <span>树成林 AI 榜<small>SHU CHENG LIN · AI FOREST</small></span>
+    </a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="#board">AI 榜</a>
+      <a href="#lab">AI 生长舱</a>
+      <a href="#forest">作品森林</a>
+      <a href="#potential">潜力森林</a>
+      <a href="#places">城市林</a>
+      <a href="#social">社会价值</a>
+      <a href="#fair">规则</a>
+      <a href="#about">关于</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="navSearch" aria-label="搜索榜单">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <button class="btn btn--ghost btn--sm" id="navLogin">登录</button>
+      <button class="btn btn--primary btn--sm" data-jump="lab">上传作品</button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="打开菜单" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- 移动端菜单 -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="移动端导航">
+  <div class="mobile-panel">
+    <button class="btn btn--ghost btn--sm" id="mobileClose" style="align-self:flex-end;margin-bottom:8px;">关闭 ✕</button>
+    <a href="#board">AI 榜</a>
+    <a href="#lab">AI 生长舱</a>
+    <a href="#forest">作品森林</a>
+    <a href="#potential">潜力森林</a>
+    <a href="#places">城市林 · 高校林</a>
+    <a href="#social">社会价值</a>
+    <a href="#fair">公平规则</a>
+    <a href="#trans">AI 透明中心</a>
+    <a href="#about">关于树成林</a>
+    <button class="btn btn--primary btn--block" data-jump="lab" style="margin-top:14px;">上传作品 · 模拟评分</button>
+  </div>
+</div>
+
+<main id="main">
+<!-- ============ Hero ============ -->
+<section class="hero" id="top">
+  <div class="hero-forest" id="heroForest" aria-hidden="true"></div>
+  <div class="hero-fog" aria-hidden="true"></div>
+  <div class="wrap hero-content">
+    <span class="eyebrow">全国大学生 AI 创造力与实践成长榜</span>
+    <h1 class="h-display">让每一次创造<br><span class="accent">长成一棵被看见的树</span></h1>
+    <p class="lead">面向全国大学生的 AI 成长、实践与价值榜单。<br>我们不奖励喧闹，我们记录那些正在真实发生的创造。</p>
+    <p class="hero-sub">一人一树，众人成林。</p>
+    <div class="hero-cta">
+      <button class="btn btn--primary" data-jump="board">进入 AI 榜</button>
+      <button class="btn btn--gold" data-jump="lab">上传作品 · 模拟评分</button>
+      <button class="btn btn--ghost" data-jump="forest">探索作品森林</button>
+      <button class="btn btn--ghost" data-jump="fair">了解评审规则</button>
+    </div>
+    <p class="hero-note"><b>作品先于人气，证据先于口号，成长先于输赢。</b></p>
+  </div>
+  <div class="scroll-hint" aria-hidden="true"><span>向下生长</span><span class="dot"></span></div>
+</section>
+<!-- ============ 社群数据 ============ -->
+<section class="stats section--tight">
+  <div class="wrap">
+    <div class="stats-grid reveal" id="statsGrid"></div>
+    <p class="tiny muted" style="margin-top:14px;text-align:center;">以上为演示用虚构数据，仅用于展示产品形态。树成林致力于成为一片由青年创造者共同生长的 AI 森林。</p>
+  </div>
+</section>
+
+<!-- ============ 本期领航树 ============ -->
+<section class="section" id="podium">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">本期代表树</span>
+      <h2 class="h2">三棵不同形态的树，三种值得被看见的成长</h2>
+      <p class="lead">我们不设领奖台。第一名是本期领航树，第二名是持续生长树，第三名是新锐创造树——形态不同，但都在认真生长。</p>
+    </div>
+    <div class="podium reveal" id="podiumGrid"></div>
+  </div>
+</section>
+
+<!-- ============ AI 榜 / 排行榜 ============ -->
+<section class="section" id="board" style="background:linear-gradient(180deg,var(--paper),#F3F6EE);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">AI 榜 · Leaderboard</span>
+      <h2 class="h2">榜单记录的是阶段，不是一个人的全部</h2>
+      <p class="lead">综合 AI 结构化评审、专业评委、认证成员评议与可验证成果，多维度呈现真实创造。可按榜单、时间、地区与赛道自由筛选。</p>
+    </div>
+
+    <div class="reveal">
+      <div class="board-tabs" id="boardTabs" role="tablist" aria-label="榜单分类"></div>
+      <div class="board-toolbar">
+        <div class="subtabs" id="subTabs"></div>
+        <div style="flex:1"></div>
+        <div class="field">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <input type="search" id="searchInput" placeholder="搜索昵称 / 城市 / 高校 / 项目 / 标签" aria-label="搜索榜单" />
+        </div>
+        <div class="selectish"><select id="timeFilter" aria-label="时间范围"><option value="week">本周</option><option value="month" selected>本月</option><option value="quarter">本季度</option><option value="year">年度</option></select></div>
+        <div class="selectish"><select id="scopeFilter" aria-label="筛选范围"><option value="all">全部成果</option><option value="certified">已认证成果</option><option value="opensource">开源项目</option><option value="social">社会价值项目</option><option value="commercial">商业化项目</option></select></div>
+      </div>
+      <div class="board-list" id="boardList" aria-live="polite"></div>
+      <div class="board-foot"><p class="tiny muted">榜单数据每期更新 · 排名下降不代表失败，只是“正在蓄力”。所有成员与项目均为虚构示例。</p></div>
+    </div>
+  </div>
+</section>
+<!-- ============ AI 生长舱 ============ -->
+<section class="section" id="lab">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">核心模块 · AI Growth Lab</span>
+      <h2 class="h2">AI 生长舱</h2>
+      <p class="lead">把作品交给 AI，不是为了得到一句“很好”。<br>而是为了知道，它还可以成长到哪里。</p>
+    </div>
+
+    <div class="lab reveal">
+      <div class="lab-inner">
+        <!-- 表单 -->
+        <form class="lab-form" id="labForm" autocomplete="off">
+          <span class="eyebrow">填写作品资料</span>
+          <h2 class="h3" style="margin:12px 0 6px;color:var(--dawn)">让作品先被理解，再被评价</h2>
+          <p class="lead">越完整、越有证据，AI 的判断越准确。所有内容仅在本地浏览器演示，不会上传服务器。</p>
+          <div class="form-grid" style="margin-top:8px;">
+            <div class="fg full"><label for="f-name">作品名称</label><input class="inp" id="f-name" placeholder="例如：乡野备课助手" value="" /></div>
+            <div class="fg"><label for="f-type">作品类型</label>
+              <select class="sel" id="f-type">
+                <option>AI 文案</option><option>AI 图片</option><option selected>AI 视频</option><option>AI 声音</option><option>AI 剪辑</option><option>Skill</option><option>智能体</option><option>AI 应用</option><option>编程项目</option><option>数据分析</option><option>自动化工作流</option><option>AI 产品设计</option><option>AI 教育</option><option>AI 公益</option><option>AI 创业项目</option>
+              </select>
+            </div>
+            <div class="fg"><label for="f-stage">项目阶段</label>
+              <select class="sel" id="f-stage"><option>想法阶段</option><option selected>原型阶段</option><option>已有用户</option><option>持续运营</option><option>商业化中</option></select>
+            </div>
+            <div class="fg full"><label for="f-intro">作品介绍</label><textarea class="ta" id="f-intro" placeholder="它是什么？解决了什么？AI 在其中做了什么、人做了什么？"></textarea></div>
+            <div class="fg"><label for="f-users-who">目标用户</label><input class="inp" id="f-users-who" placeholder="例如：乡村小学教师" /></div>
+            <div class="fg"><label for="f-problem">解决的问题</label><input class="inp" id="f-problem" placeholder="例如：备课耗时、资源匮乏" /></div>
+            <div class="fg full"><label for="f-tools">使用的 AI 工具 <span class="opt">（逗号分隔）</span></label><input class="inp" id="f-tools" placeholder="例如：Claude、剪映、Stable Diffusion" /></div>
+            <div class="fg"><label for="f-link">项目链接 <span class="opt">（选填）</span></label><input class="inp" id="f-link" placeholder="https://" /></div>
+            <div class="fg"><label for="f-repo">开源地址 <span class="opt">（选填）</span></label><input class="inp" id="f-repo" placeholder="https://github.com/..." /></div>
+            <div class="fg"><label for="f-users">用户数量</label>
+              <select class="sel" id="f-users"><option value="0">暂无</option><option value="1">1—50</option><option value="2" selected>50—500</option><option value="3">500—5000</option><option value="4">5000 以上</option></select>
+            </div>
+            <div class="fg"><label for="f-revenue">收入区间</label>
+              <select class="sel" id="f-revenue"><option value="0">0—1000 元</option><option value="1" selected>1000—5000 元</option><option value="2">5000—10000 元</option><option value="3">1 万—5 万元</option><option value="4">5 万元以上</option></select>
+            </div>
+            <div class="fg full"><label for="f-social">社会价值说明 <span class="opt">（选填）</span></label><textarea class="ta" id="f-social" placeholder="它帮助了谁？带来了什么真实改变？"></textarea></div>
+            <div class="fg full"><label for="f-evidence">数据或成果证据 <span class="opt">（选填，但很重要）</span></label><textarea class="ta" id="f-evidence" placeholder="例如：服务 23 位教师，节省备课时间约 40%，3 条真实用户反馈……"></textarea></div>
+
+            <div class="fg full"><label>图片 / 视频截图 <span class="opt">（本地预览，不上传）</span></label>
+              <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="选择图片或视频文件进行本地预览">
+                点击或拖拽文件到此处 · 仅在本机预览
+                <input type="file" id="fileInput" accept="image/*,video/*" multiple hidden />
+              </div>
+              <div class="dz-preview" id="dzPreview"></div>
+            </div>
+
+            <div class="fg full"><label>持续更新强度（最近 4 周）</label>
+              <div class="range-row"><input type="range" id="f-update" min="0" max="4" value="2" /><span class="range-val" id="updateVal">2 周</span></div>
+            </div>
+            <div class="fg full"><label>社群贡献（帮助过的成员）</label>
+              <div class="range-row"><input type="range" id="f-help" min="0" max="20" value="4" /><span class="range-val" id="helpVal">4 人</span></div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn--gold btn--block" style="margin-top:20px;">开始 AI 模拟评分</button>
+          <p class="lab-disclaim"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 8v5M12 16h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg> 本评分由前端 Demo 逻辑根据你填写的内容动态生成，<b style="color:var(--sprout)">并非真实大模型调用</b>。模拟评分只用于成长参考，不代表正式榜单结果。</p>
+        </form>
+
+        <!-- 报告 -->
+        <div class="lab-report" id="labReport" aria-live="polite">
+          <div class="report-empty" id="reportEmpty">
+            <svg class="seed-anim" viewBox="0 0 90 90" aria-hidden="true"><path d="M45 78V46" stroke="#B9DC76" stroke-width="3" stroke-linecap="round"/><path d="M45 50c-8 0-14-6-14-14 8 0 14 6 14 14z" fill="#5E7565"/><path d="M45 54c8 0 14-5 14-13-8 0-14 5-14 13z" fill="#B9DC76"/><circle cx="45" cy="80" r="5" fill="#5E7565" opacity=".5"/></svg>
+            <h3 class="h3" style="color:var(--dawn)">这里会长出你的成长报告</h3>
+            <p style="margin-top:8px;">填写左侧资料并提交，AI 生长舱会生成包含分数、维度、优势短板、适合榜单、上榜差距与下一步行动的完整报告。</p>
+          </div>
+          <div class="scoring" id="scoring">
+            <svg class="ring" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="50" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="8"/><circle id="ringFill" cx="60" cy="60" r="50" fill="none" stroke="#B9DC76" stroke-width="8" stroke-linecap="round" stroke-dasharray="314" stroke-dashoffset="314" transform="rotate(-90 60 60)"/></svg>
+            <p class="step" id="scoringStep">正在读取作品资料…</p>
+          </div>
+          <div class="report" id="report"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============ AI 评审官 ============ -->
+<section class="section" id="judge" style="background:linear-gradient(180deg,#F3F6EE,var(--paper));">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">核心模块 · AI Judge</span>
+      <h2 class="h2">AI 评审官：让作品先被理解，再被评价</h2>
+      <p class="lead">AI 负责提高评审效率，但不拥有对一个人的最终定义权。任何重要判断都应该可以解释、可以复核、可以申诉。</p>
+    </div>
+    <div class="judge-grid reveal">
+      <div class="card weight-card">
+        <h3 class="h3">正式榜单评分权重</h3>
+        <p class="muted tiny" style="margin-top:6px;">单一来源都不能决定结果。AI 只是其中一环。</p>
+        <div id="weights"></div>
+        <div class="persona">
+          <p class="q">“我会认真读完你的作品，但我可能看错。所以我给出的每一分，都附带理由、证据与置信度，并随时可以被人工复核与申诉。”</p>
+          <p class="tiny muted" style="margin-top:10px;">—— AI 评审官的人格设定：认真、理性、谦逊</p>
+        </div>
+        <button class="btn btn--ghost btn--sm" style="margin-top:16px;" id="openCriteria">查看完整评分标准与一份示例评分详情 →</button>
+      </div>
+      <div>
+        <div class="judge-points" id="judgePoints"></div>
+        <div class="card" style="padding:20px;margin-top:14px;background:var(--accent-soft);border:none;">
+          <h4 class="tiny" style="font-weight:660;color:var(--accent);letter-spacing:.04em;">AI 不得作为唯一裁判</h4>
+          <p class="tiny" style="color:var(--ink-soft);margin-top:8px;line-height:1.6;">AI 低置信度的结果会自动进入人工复核；候选人可申请重新评分；正式结果保留完整审计记录；所有算法推荐都会显示推荐理由。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 模拟冲榜 ============ -->
+<section class="section" id="rush">
+  <div class="wrap">
+    <div class="rush reveal">
+      <span class="eyebrow">模拟冲榜 · Growth Path</span>
+      <h2 class="h2" style="margin:14px 0 10px;">真正的冲榜，不是找更多人给你投票</h2>
+      <p class="lead" style="color:rgba(243,245,239,.74);max-width:640px;">而是让作品配得上更高的位置。把模糊的努力，变成清晰、可执行的成长路径。完成下面的任务勾选，预计分数与排名会实时变化。</p>
+      <div class="rush-grid">
+        <div class="rush-now">
+          <div class="label">当前模拟排名</div>
+          <div class="rk" id="rushRank">第 37 名</div>
+          <div class="target" id="rushTarget">目标榜单：AI 视频榜</div>
+          <div class="rush-meta"><span>与前一名差距 <b id="rushGapPrev" style="color:var(--sprout)">+1.6</b></span><span>与榜单均值 <b id="rushGapAvg" style="color:var(--sprout)">+2.9</b></span></div>
+          <div style="margin-top:16px;text-align:left;font-size:12.5px;color:rgba(243,245,239,.72);">
+            <div style="display:flex;justify-content:space-between;margin:4px 0;"><span>当前最强维度</span><b id="rushBest" style="color:var(--sprout)">创意</b></div>
+            <div style="display:flex;justify-content:space-between;margin:4px 0;"><span>当前最弱维度</span><b id="rushWorst" style="color:var(--sun-gold)">成果证据</b></div>
+          </div>
+        </div>
+        <div>
+          <div id="taskList"></div>
+          <div class="rush-proj" id="rushProj">完成全部任务后，预计可提升约 <b>+11.5</b> 分，进入前 <b>20</b> 名。</div>
+          <p class="tiny" style="color:rgba(243,245,239,.5);margin-top:14px;">模拟冲榜不是鼓励迎合算法，而是帮助你把努力方向变得具体。完成 AI 模拟评分后，这里会根据你的作品个性化生成。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============ 潜力森林 ============ -->
+<section class="section" id="potential" style="background:linear-gradient(180deg,var(--paper),#F3F6EE);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">潜力森林 · Discovery</span>
+      <h2 class="h2">不是让最热门的人越来越热门</h2>
+      <p class="lead">而是让真正有价值的创造，有机会抵达需要它的人。这里发现那些质量高但曝光少、持续进步、来自非热门城市与高校的作品。每张卡片都会说明推荐理由。</p>
+    </div>
+    <div class="rec-grid reveal" id="recGrid"></div>
+  </div>
+</section>
+
+<!-- ============ 作品森林 ============ -->
+<section class="section" id="forest">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">作品森林 · Work Forest</span>
+      <h2 class="h2">每个项目，都是一棵正在生长的树</h2>
+      <p class="lead">树干由技术完成度决定，树形由创意决定，树冠由用户价值决定，周边生态由社会价值决定，叶片由持续更新决定，年轮由项目时间决定。点击任意一棵树查看项目详情。</p>
+    </div>
+    <div class="reveal">
+      <div class="forest-filters" id="forestFilters"></div>
+      <div class="forest-stage">
+        <div class="forest-trees" id="forestTrees"></div>
+        <div class="forest-ground" aria-hidden="true"></div>
+      </div>
+      <div class="forest-legend">
+        <span><i class="lg-dot" style="background:var(--pine-deep)"></i>树越高大 = 综合越强</span>
+        <span><i class="lg-dot" style="background:var(--sprout)"></i>嫩绿新芽 = 新成员 / 高潜力</span>
+        <span><i class="lg-dot" style="background:var(--sun-gold)"></i>金点 = 社会价值项目</span>
+        <span><i class="lg-dot" style="background:var(--moss)"></i>根系连接 = 已完成合作</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 城市林 / 高校林 ============ -->
+<section class="section" id="places" style="background:linear-gradient(180deg,var(--paper),#F3F6EE);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">城市林 · 高校林</span>
+      <h2 class="h2">创造正在很多地方同时发生</h2>
+      <p class="lead">城市林与高校林代表创造和共创密度，不代表地区或学校之间的优劣。我们鼓励跨地区、跨专业、跨学校合作。</p>
+    </div>
+    <div class="cs-toggle reveal" role="tablist" aria-label="切换城市林或高校林">
+      <button class="active" data-place="city" role="tab" aria-selected="true">城市林</button>
+      <button data-place="school" role="tab" aria-selected="false">高校林</button>
+    </div>
+    <div class="grid grid-3 reveal" id="placeGrid"></div>
+  </div>
+</section>
+<!-- ============ 成长等级 + 勋章 ============ -->
+<section class="section" id="growth">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">成长系统 · Growth Rings</span>
+      <h2 class="h2">每位成员，都拥有一棵自己的成长树</h2>
+      <p class="lead">从一颗种子，到成林者，成长被记录为可见的年轮。积分来自真实创造与对他人的帮助，无法靠纯签到或无意义互动堆砌。</p>
+    </div>
+    <div class="levels reveal" id="levelTrack"></div>
+    <div class="section-head reveal" style="margin-bottom:24px;">
+      <h3 class="h3">勋章墙</h3>
+      <p class="muted tiny" style="margin-top:6px;">勋章使用树叶、种子、枝干、年轮等抽象符号，克制、专业、有荣誉感。点击查看获得条件与背后的成长故事。</p>
+    </div>
+    <div class="badge-grid reveal" id="badgeGrid"></div>
+  </div>
+</section>
+
+<!-- ============ 社会价值 ============ -->
+<section class="section" id="social" style="background:linear-gradient(180deg,var(--paper),#EEF3E7);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">改变正在发生 · Social Value</span>
+      <h2 class="h2">改变世界，不一定从宏大的口号开始</h2>
+      <p class="lead">它也可以从帮助一个具体的人，解决一个具体的问题开始。下面是青年用 AI 回应真实问题的故事（均为虚构示例）。</p>
+    </div>
+    <div class="story-grid reveal" id="storyGrid"></div>
+  </div>
+</section>
+<!-- ============ 公平规则 + AI 透明中心 ============ -->
+<section class="section" id="fair">
+  <div class="wrap">
+    <div class="fair reveal">
+      <span class="eyebrow">公平机制 · Fairness</span>
+      <h2 class="h2" style="margin:14px 0 10px;">我们希望 AI 帮助普通人的作品被看见</h2>
+      <p class="lead" style="color:rgba(243,245,239,.74);max-width:680px;">而不是让已有优势的人获得更多优势。下面是树成林始终坚持的公平原则。</p>
+      <div class="principles" id="principles"></div>
+      <div class="anti-bias">
+        <b>投票打榜，不搞拉票。</b> 粉丝数、群人数与转发量不计入评分；异常集中投票会进入人工复核；批量重复理由视为无效评议；结果公布后公开有效票、无效票与复核情况，并提供申诉入口。
+      </div>
+
+      <div id="trans" style="margin-top:40px;padding-top:36px;border-top:1px solid rgba(255,255,255,.12);">
+        <span class="eyebrow">AI 评审透明中心 · Transparency</span>
+        <h3 class="h3" style="color:var(--dawn);margin:12px 0 4px;">规则、权重与模型，都摆在台面上</h3>
+        <div class="trans-grid" id="transGrid"></div>
+        <div class="trans-meta" id="transMeta"></div>
+        <div style="margin-top:20px;display:flex;flex-wrap:wrap;gap:10px;">
+          <button class="btn btn--light btn--sm" id="openCriteria2">查看评分标准</button>
+          <button class="btn btn--light btn--sm" data-jump="judge">了解评审权重</button>
+          <button class="btn btn--light btn--sm" id="appealBtn">申诉与重新评分入口</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 加入 ============ -->
+<section class="section join" id="about">
+  <div class="wrap reveal">
+    <span class="eyebrow" style="justify-content:center;">关于树成林</span>
+    <h2 class="h1">我们不是在寻找少数天才<br>我们是在帮助一代青年，找到能改变世界的位置</h2>
+    <p class="lead" style="max-width:640px;margin:0 auto;">有人先长成一棵大树，有人先为别人遮下一片树荫。这两种成长，都值得被看见。愿最认真创造的人被看见，愿最善良的技术被需要，愿每一颗种子都能找到适合自己的土地。</p>
+    <div class="join-cta">
+      <button class="btn btn--primary" data-jump="lab">上传作品 · 模拟评分</button>
+      <button class="btn btn--ghost" data-jump="board">查看完整榜单</button>
+      <button class="btn btn--ghost" id="shareSite">分享树成林</button>
+    </div>
+  </div>
+</section>
+</main>
+<!-- ============ 页尾 ============ -->
+<footer class="footer">
+  <svg class="footer-forest" id="footerForest" viewBox="0 0 1440 160" preserveAspectRatio="none" aria-hidden="true"></svg>
+  <div class="wrap footer-inner">
+    <div class="footer-lead reveal">
+      <h2 class="h1">一棵树的成长值得记录<br>一群人的创造，可以改变时代</h2>
+      <p>面向全国大学生的 AI 成长、实践与价值平台。让优秀青年被发现，让真实创造被看见。</p>
+      <div class="footer-cta">
+        <button class="btn btn--gold" data-jump="lab">上传我的作品</button>
+        <button class="btn btn--light" data-jump="lab">进入 AI 生长舱</button>
+        <button class="btn btn--light" data-jump="forest">探索作品森林</button>
+        <button class="btn btn--light" data-jump="about">加入树成林</button>
+      </div>
+    </div>
+
+    <div class="footer-cols">
+      <div class="footer-brand">
+        <div class="brand" style="color:var(--dawn)">
+          <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#183D2C"/><path d="M16 27V13" stroke="#B9DC76" stroke-width="2" stroke-linecap="round"/><path d="M16 15c-4 0-7-3-7-7 4 0 7 3 7 7z" fill="#B9DC76"/><path d="M16 17c4 0 7-2 7-6-4 0-7 2-7 6z" fill="#5E7565"/></svg>
+          <span>树成林 AI 榜<small style="color:var(--moss)">SHU CHENG LIN · AI FOREST</small></span>
+        </div>
+        <p>一人一树，众人成林。让每一次创造被看见，让每一种成长都有坐标。</p>
+      </div>
+      <div><h5>探索</h5><a href="#board">AI 榜</a><a href="#forest">作品森林</a><a href="#potential">潜力森林</a><a href="#places">城市林 · 高校林</a></div>
+      <div><h5>能力</h5><a href="#lab">AI 生长舱</a><a href="#judge">AI 评审官</a><a href="#rush">模拟冲榜</a><a href="#growth">成长与勋章</a></div>
+      <div><h5>信任</h5><a href="#fair">公平规则</a><a href="#trans">AI 透明中心</a><a href="#social">社会价值</a><a href="#about">关于树成林</a></div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 树成林 AI 榜 · 本站为产品演示 Demo，所有成员、项目、数据、收入与反馈均为虚构示例。</span>
+      <span>只展示成员主动公开的信息 · 不公开私人手机号与邮箱 · 评审证据仅用于评审 · 可申请删除 AI 评审记录</span>
+    </div>
+
+    <div class="footer-poem reveal">
+      愿我们在 AI 时代，不只是学会使用工具。<br>更能用工具创造价值、帮助他人，并共同长成一片森林。
+    </div>
+  </div>
+</footer>
+<!-- ============ 弹窗 / 抽屉 ============ -->
+<!-- 人物详情 / 个人主页 抽屉 -->
+<div class="overlay overlay--right" id="memberDrawer" role="dialog" aria-modal="true" aria-label="成员详情">
+  <div class="drawer">
+    <button class="drawer-x" data-close aria-label="关闭">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <div id="memberDrawerBody"></div>
+  </div>
+</div>
+
+<!-- 项目详情弹窗 -->
+<div class="overlay overlay--center" id="projectModal" role="dialog" aria-modal="true" aria-label="项目详情">
+  <div class="modal modal--wide">
+    <button class="modal-x" data-close aria-label="关闭"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    <div class="modal-pad" id="projectModalBody"></div>
+  </div>
+</div>
+
+<!-- 投票评议弹窗 -->
+<div class="overlay overlay--center" id="voteModal" role="dialog" aria-modal="true" aria-label="投票评议">
+  <div class="modal">
+    <button class="modal-x" data-close aria-label="关闭"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    <div class="modal-pad" id="voteModalBody"></div>
+  </div>
+</div>
+
+<!-- 勋章弹窗 -->
+<div class="overlay overlay--center" id="badgeModal" role="dialog" aria-modal="true" aria-label="勋章详情">
+  <div class="modal">
+    <button class="modal-x" data-close aria-label="关闭"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    <div class="modal-pad" id="badgeModalBody"></div>
+  </div>
+</div>
+
+<!-- 评分标准弹窗 -->
+<div class="overlay overlay--center" id="criteriaModal" role="dialog" aria-modal="true" aria-label="评分标准与示例评分详情">
+  <div class="modal modal--wide">
+    <button class="modal-x" data-close aria-label="关闭"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    <div class="modal-pad" id="criteriaModalBody"></div>
+  </div>
+</div>
+
+<!-- 分享卡片弹窗 -->
+<div class="overlay overlay--center" id="shareModal" role="dialog" aria-modal="true" aria-label="分享卡片">
+  <div class="modal">
+    <button class="modal-x" data-close aria-label="关闭"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    <div class="modal-pad" id="shareModalBody"></div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast-wrap" id="toastWrap" aria-live="polite" aria-atomic="true"></div>
+
+<script>
+"use strict";
+/* ============================================================
+   树成林 AI 榜 — 应用逻辑
+   全部为前端 Demo：示例数据虚构，AI 评分为本地模拟，非真实模型调用。
+   预留 API 接口位置见 calculateAIScore() 注释。
+   ============================================================ */
+(function(){
+
+/* ---------- 成长等级 ---------- */
+const LEVELS = [
+  {nm:"种子",   st:"刚刚埋下"},
+  {nm:"萌芽",   st:"破土而出"},
+  {nm:"新生枝", st:"第一次伸展"},
+  {nm:"生长树", st:"稳定生长"},
+  {nm:"成树",   st:"枝繁叶茂"},
+  {nm:"共生者", st:"照亮他人"},
+  {nm:"成林者", st:"长期贡献生态"}
+];
+
+/* ---------- 勋章体系 ---------- */
+const BADGES = [
+  {id:"seed",   nm:"第一颗种子", ds:"首次上传作品",        rare:1, sym:"seed",  story:"每一片森林，都从有人愿意种下第一颗种子开始。"},
+  {id:"sprout", nm:"破土而出",   ds:"首次完成 AI 模拟评分", rare:1, sym:"sprout",story:"第一次让 AI 认真读完自己的作品，是成长的起点。"},
+  {id:"grow4",  nm:"连续生长",   ds:"连续四周更新作品",     rare:2, sym:"rings", story:"真正的成长，藏在一周又一周不被看见的坚持里。"},
+  {id:"realuser",nm:"真实用户",  ds:"获得首个真实用户反馈", rare:2, sym:"leaf",  story:"当作品第一次帮到一个真实的人，它就有了根。"},
+  {id:"firstpay",nm:"第一位客户",ds:"完成首次商业交付",     rare:2, sym:"coin",  story:"被一个人愿意付费，是价值最朴素的证明。"},
+  {id:"oss",    nm:"开源枝叶",   ds:"发布开源项目",         rare:2, sym:"branch",story:"把枝叶分给别人，森林才会更快长成。"},
+  {id:"help10", nm:"共生伙伴",   ds:"帮助十位成员",         rare:3, sym:"hands", story:"有人先长成大树，有人先为别人遮下树荫。"},
+  {id:"city",   nm:"城市微光",   ds:"为所在城市创造价值",   rare:2, sym:"spark", story:"改变，可以从自己生活的这座城市开始。"},
+  {id:"social", nm:"社会回应",   ds:"解决一个真实社会问题", rare:3, sym:"heart", story:"最善良的技术，会被最需要它的人需要。"},
+  {id:"aes",    nm:"审美新枝",   ds:"获得审美榜认可",       rare:2, sym:"flower",story:"审美也是一种能被看见的能力。"},
+  {id:"tech",   nm:"技术深根",   ds:"获得技术榜认可",       rare:2, sym:"root",  story:"看不见的根越深，看得见的树越稳。"},
+  {id:"idea",   nm:"创意树冠",   ds:"获得创意榜认可",       rare:2, sym:"crown", story:"创意是树冠，让人一眼认出你的形状。"},
+  {id:"forest", nm:"成林者",     ds:"长期贡献社群生态",     rare:3, sym:"forest",story:"一个人走得快，一群人走得远，一片森林走得久。"},
+  {id:"world",  nm:"被世界需要", ds:"项目服务超过一千名用户",rare:3, sym:"globe", story:"愿有一天，你创造的东西，真的被世界需要。"}
+];
+
+/* ---------- 评审权重 ---------- */
+const WEIGHTS = [
+  {k:"ai",    label:"AI 结构化评审", sub:"读取资料、结构化打分", pct:30, color:"linear-gradient(90deg,#5E7565,#B9DC76)"},
+  {k:"human", label:"专业评委评审",   sub:"行业评委独立评分",     pct:30, color:"linear-gradient(90deg,#183D2C,#5E7565)"},
+  {k:"peer",  label:"认证成员评议",   sub:"实名社群成员评议",     pct:25, color:"linear-gradient(90deg,#D6B76D,#E4CE97)"},
+  {k:"evid",  label:"可验证成果证据", sub:"真实数据与用户反馈",   pct:15, color:"linear-gradient(90deg,#7C847E,#A9B0AA)"}
+];
+
+/* ---------- AI 评审官职责 ---------- */
+const JUDGE_POINTS = [
+  "读取作品资料，理解它到底想解决什么",
+  "分析成果证据，区分真实效果与精美包装",
+  "根据公开标准结构化评分，可逐项解释",
+  "检查材料完整度，提示缺失信息",
+  "识别疑似重复或夸大描述并标注",
+  "对不同赛道使用不同评分模型",
+  "帮助人工评委快速理解一份作品",
+  "发现排名较低但潜力较高的项目",
+  "推荐合适的导师、成员与合作资源",
+  "为创作者生成可执行的改进路线"
+];
+
+/* ---------- 评分标准（不同维度） ---------- */
+const CRITERIA = [
+  {cn:"真实性与证据", weight:"20%", reason:"是否提供可验证的数据、用户反馈或成果记录，而非仅有描述。", evid:"成果证据字段、用户数量、真实反馈条数"},
+  {cn:"技术完成度",   weight:"18%", reason:"作品的实现完整度、稳定性，以及 AI 与人工分工是否清晰。", evid:"项目链接、开源地址、项目阶段"},
+  {cn:"用户价值",     weight:"18%", reason:"是否真正解决了目标用户的具体问题，价值是否落到实处。", evid:"目标用户、解决的问题、用户数量"},
+  {cn:"创新性",       weight:"14%", reason:"思路、形态或应用场景是否带来新意，而非简单复制。", evid:"作品介绍、使用的 AI 工具组合"},
+  {cn:"社会价值",     weight:"14%", reason:"是否回应真实社会问题，是否帮助到更广泛或更弱势的人群。", evid:"社会价值说明、受益人群"},
+  {cn:"审美与表达",   weight:"08%", reason:"视觉、叙事与体验的完成度，是否清晰且有质感。", evid:"截图、演示、项目页面"},
+  {cn:"持续成长",     weight:"08%", reason:"是否持续更新与迭代，是否对社群有正向贡献。", evid:"更新频率、社群帮助记录"}
+];
+
+/* ---------- 公平原则 ---------- */
+const PRINCIPLES = [
+  "不以粉丝数量作为能力指标",
+  "不以社交关系决定曝光",
+  "不以学校知名度自动加分",
+  "不以城市、性别、专业背景决定评分",
+  "不因包装精美而忽视真实效果",
+  "不因项目规模较小而否定社会价值",
+  "AI 低置信度结果必须进入人工复核",
+  "候选人可以申请重新评分",
+  "正式结果保留完整审计记录",
+  "算法推荐必须显示推荐理由"
+];
+
+/* ---------- AI 透明中心数据 ---------- */
+const TRANS = {
+  stats:[
+    {n:"v2.6", l:"AI 评审模型版本"},
+    {n:"100%", l:"低置信度结果人工复核"},
+    {n:"7", l:"结构化评分维度"},
+    {n:"23", l:"本期异常投票（已复核）"}
+  ],
+  meta:[
+    ["规则更新时间","2026-06-01"],
+    ["本期无效票","91 票（批量重复理由 / 自投）"],
+    ["人工复核比例","AI 评分中置信度低于 0.75 的 100% 复核"],
+    ["申诉处理时效","正式榜单结果公布后 7 个工作日内"]
+  ]
+};
+
+/* ---------- 社会价值故事 ---------- */
+const STORIES = [
+  {topic:"教育公平", q:"让乡村老师的备课时间，省下一半", who:"中西部乡村小学的一线教师",
+   did:"做了一个按教材章节生成教案、课件与练习的助手", ai:"AI 负责草拟与排版，老师负责审核与本地化",
+   change:"23 位老师试用，平均每周省下约 6 小时", need:"需要更多学科模板与离线可用版本"},
+  {topic:"老年服务", q:"帮父母那一代，看懂手机里的世界", who:"不熟悉智能手机的老年人及其子女",
+   did:"做了把复杂 App 操作翻译成大字图文步骤的小工具", ai:"AI 把截图转成一步一图的操作指引",
+   change:"社区 60 位老人使用，挂号、缴费成功率明显提升", need:"需要志愿者一起补充更多常用场景"},
+  {topic:"无障碍", q:"让信息，也能被听障朋友顺畅接收", who:"听障人群与需要文字信息的用户",
+   did:"做了把会议与课堂语音实时转写并整理为纪要的工具", ai:"AI 负责转写、分段与要点归纳",
+   change:"在两门公开课中试用，纪要被反复下载使用", need:"需要更准确的专业术语词库"},
+  {topic:"小微企业服务", q:"帮街角小店，把内容做得像样一点", who:"没有设计与文案预算的个体商户",
+   did:"做了根据商品照片自动生成文案与海报排版的小程序", ai:"AI 负责文案与版式建议，店主一键微调",
+   change:"帮 18 家小店做了上新内容，出图时间从数小时降到几分钟", need:"需要更多行业模板与方言文案"}
+];
+/* ---------- 成员数据（全部为虚构示例） ----------
+   d: 七维度评分 / comp: 四类评分来源（用于加权综合分） */
+const MEMBERS = [
+  {id:"m1", name:"青禾", av:["#2f6b4a","#B9DC76"], city:"成都", school:"成都某高校", team:"", proj:"乡野备课助手",
+   tTech:"AI 应用开发", tBiz:"AI 教育", tSocial:"教育公平",
+   result:"帮 23 位乡村教师每周省下约 6 小时备课时间", skills:["AI 应用","教育","Prompt 工程"],
+   d:{te:84,cr:78,us:92,so:95,ae:74,gr:88,ev:90}, comp:{ai:88,hu:90,pe:86,ev:92},
+   prev:3, pts:9120, lv:5, cert:3, badges:["seed","sprout","realuser","social","help10","world"], stage:"持续运营",
+   oss:true, look:true, rev:2, users:3, isNew:false, helped:14, upd:4, collabs:3, prog:12,
+   bio:"师范背景，相信教育公平可以被技术一点点推近。把 AI 当成乡村老师的助教，而不是替代者。",
+   collabDir:"寻找愿意补充学科模板的师范生与做离线部署的工程同学。",
+   story:"乡村老师备课资源少、时间紧。她做了一个按教材章节生成教案与练习的助手，老师只需审核与本地化。",
+   feedback:[{t:"以前一晚上备两课，现在审一审就好，能多陪陪孩子。",by:"某乡村小学教师"},{t:"练习题贴合我们的学情，难得。",by:"某乡镇教研员"}], rec:"因为解决了一个长期被忽视的问题，且持续四周更新"},
+
+  {id:"m2", name:"松果实验室", av:["#1f4a36","#5E7565"], city:"杭州", school:"杭州某高校", team:"松果实验室 · 4 人",
+   proj:"店小二 · 小店内容引擎", tTech:"自动化工作流", tBiz:"小红书店铺", tSocial:"小微企业服务",
+   result:"为 18 家街角小店把出图时间从数小时缩短到几分钟", skills:["工作流","电商","设计"],
+   d:{te:88,cr:82,us:88,so:80,ae:86,gr:84,ev:85}, comp:{ai:86,hu:88,pe:90,ev:84},
+   prev:1, pts:9460, lv:6, cert:3, badges:["seed","firstpay","oss","city","aes","forest"], stage:"商业化中",
+   oss:false, look:true, rev:3, users:3, isNew:false, helped:9, upd:3, collabs:5, prog:6,
+   bio:"四个人的小团队，喜欢把麻烦的事自动化。我们相信小店也值得好内容。",
+   collabDir:"寻找方言文案合作者与本地生活类商户。",
+   story:"个体商户没有设计预算。他们做了根据商品照片自动生成文案与海报排版的小程序，店主一键微调。",
+   feedback:[{t:"上新再也不用求人做图了。",by:"某社区水果店主"},{t:"文案有烟火气，不像机器写的。",by:"某早餐店主"}], rec:null},
+
+  {id:"m3", name:"北辰", av:["#274b8a","#9ec2f0"], city:"北京", school:"北京某高校", team:"",
+   proj:"小宇宙 · 短视频分镜助手", tTech:"AI 视频", tBiz:"内容创作", tSocial:"",
+   result:"把一条口播脚本自动拆成可拍摄的分镜与运镜建议", skills:["AI 视频","剪辑","脚本"],
+   d:{te:80,cr:90,us:78,so:60,ae:88,gr:82,ev:72}, comp:{ai:84,hu:82,pe:80,ev:70},
+   prev:2, pts:8700, lv:5, cert:2, badges:["seed","sprout","grow4","idea","aes"], stage:"已有用户",
+   oss:false, look:false, rev:1, users:2, isNew:false, helped:5, upd:3, collabs:2, prog:9,
+   bio:"做视频出身，后来发现最难的不是剪辑，是把想法讲清楚。",
+   collabDir:"寻找擅长选题的内容创作者一起打磨模板。",
+   story:"新手做视频卡在分镜。他做了把口播脚本自动拆成分镜与运镜建议的助手，降低开拍门槛。",
+   feedback:[{t:"第一次知道自己的脚本怎么拍。",by:"某校园 UP 主"}], rec:null},
+
+  {id:"m4", name:"微光", av:["#7a4ea0","#d6b3ec"], city:"武汉", school:"武汉某高校", team:"",
+   proj:"听见 · 实时转写纪要", tTech:"AI 声音", tBiz:"", tSocial:"无障碍",
+   result:"为听障同学把课堂语音实时转写并整理成纪要", skills:["语音","无障碍","整理"],
+   d:{te:82,cr:74,us:90,so:94,ae:70,gr:80,ev:82}, comp:{ai:85,hu:88,pe:84,ev:80},
+   prev:8, pts:7980, lv:4, cert:2, badges:["seed","realuser","social"], stage:"已有用户",
+   oss:true, look:true, rev:0, users:2, isNew:false, helped:7, upd:4, collabs:1, prog:18,
+   bio:"因为身边有听障的朋友，才开始做这件事。技术应该让信息更平等。",
+   collabDir:"寻找愿意一起补充专业术语词库的各专业同学。",
+   story:"听障同学难以实时接收课堂信息。她做了实时转写并整理为纪要的工具，纪要被反复下载使用。",
+   feedback:[{t:"终于能跟上老师的节奏了。",by:"某听障在校生"},{t:"纪要比我手记的还全。",by:"某旁听同学"}], rec:"因为解决了小众但重要的问题，且进步幅度进入本周前 10%"},
+
+  {id:"m5", name:"林野同学", av:["#3a5f2a","#bcd98a"], city:"长沙", school:"长沙某高校", team:"",
+   proj:"田垄 · 农技问答智能体", tTech:"智能体", tBiz:"企业服务", tSocial:"乡村发展",
+   result:"把零散农技知识做成能随时问的田间助手", skills:["智能体","RAG","农业"],
+   d:{te:86,cr:80,us:85,so:88,ae:68,gr:90,ev:78}, comp:{ai:86,hu:84,pe:82,ev:76},
+   prev:12, pts:7600, lv:4, cert:2, badges:["seed","sprout","grow4","social"], stage:"已有用户",
+   oss:true, look:true, rev:1, users:2, isNew:false, helped:6, upd:4, collabs:2, prog:22,
+   bio:"老家在县城，想让种地的人也能用上 AI。",
+   collabDir:"寻找农业院校同学与县域合作社。",
+   story:"农技知识零散、问人难。他用智能体把资料整理成能随时问的田间助手。",
+   feedback:[{t:"打药时间问它准没错。",by:"某种植户"}], rec:"因为持续四周更新，且来自非热门城市"},
+
+  {id:"m6", name:"纸飞机 AI", av:["#b06a2c","#f0c79a"], city:"西安", school:"西安某高校", team:"",
+   proj:"折叠 · 简历改写工具", tTech:"AI 文案", tBiz:"自由职业", tSocial:"就业服务",
+   result:"帮应届生把经历改写成更有说服力的简历", skills:["文案","求职","Prompt"],
+   d:{te:74,cr:82,us:84,so:78,ae:80,gr:76,ev:70}, comp:{ai:80,hu:78,pe:82,ev:68},
+   prev:9, pts:7400, lv:4, cert:1, badges:["seed","sprout","realuser"], stage:"已有用户",
+   oss:false, look:false, rev:1, users:2, isNew:false, helped:4, upd:2, collabs:1, prog:8,
+   bio:"自己找工作被简历卡过，于是做了这个。",
+   collabDir:"寻找 HR 视角的伙伴一起校准。",
+   story:"应届生不会写简历。他做了把经历改写成更有说服力表达的工具，并标注 AI 与人工的分工。",
+   feedback:[{t:"改完之后面试邀约多了。",by:"某应届毕业生"}], rec:null},
+
+  {id:"m7", name:"山岚", av:["#2c6e7a","#a9dde6"], city:"昆明", school:"昆明某高校", team:"",
+   proj:"山海 · 方言文化档案", tTech:"数据分析", tBiz:"数字产品", tSocial:"文化传承",
+   result:"用 AI 整理并保存正在消失的方言词条", skills:["数据","语言","文化"],
+   d:{te:78,cr:86,us:72,so:90,ae:84,gr:84,ev:74}, comp:{ai:82,hu:84,pe:80,ev:72},
+   prev:0, pts:6900, lv:3, cert:2, badges:["seed","sprout","social","idea"], stage:"原型阶段",
+   oss:true, look:true, rev:0, users:1, isNew:true, helped:3, upd:3, collabs:1, prog:31,
+   bio:"想在方言彻底消失之前，给它建一座小小的档案馆。",
+   collabDir:"寻找各地愿意录入家乡话的同学。",
+   story:"很多方言正在消失。她用 AI 辅助整理、标注并保存方言词条，建立可检索的文化档案。",
+   feedback:[{t:"听到奶奶说的词被记下来，鼻子一酸。",by:"某参与录入的同学"}], rec:"因为首次提交即展现独特价值，来自非热门城市"},
+
+  {id:"m8", name:"有枝", av:["#8a6f2d","#e4ce97"], city:"南京", school:"南京某高校", team:"",
+   proj:"枝形 · 品牌视觉生成", tTech:"AI 图像", tBiz:"AI 工具", tSocial:"",
+   result:"为初创团队快速生成统一风格的品牌视觉", skills:["AI 图像","品牌","审美"],
+   d:{te:80,cr:88,us:80,so:58,ae:94,gr:78,ev:70}, comp:{ai:84,hu:86,pe:82,ev:68},
+   prev:5, pts:7200, lv:4, cert:2, badges:["seed","aes","idea","firstpay"], stage:"商业化中",
+   oss:false, look:true, rev:2, users:2, isNew:false, helped:2, upd:2, collabs:2, prog:7,
+   bio:"对好看这件事有点固执。审美也是生产力。",
+   collabDir:"寻找有品牌需求的创业团队。",
+   story:"初创团队没有设计资源。她做了快速生成统一风格品牌视觉的工具，兼顾效率与质感。",
+   feedback:[{t:"一套图下来，团队气质都不一样了。",by:"某初创合伙人"}], rec:null},
+
+  {id:"m9", name:"野生像素", av:["#3a3f5a","#b6bce0"], city:"深圳", school:"深圳某高校", team:"",
+   proj:"像素工坊 · 独立游戏素材", tTech:"AI 图像", tBiz:"数字产品", tSocial:"",
+   result:"帮独立开发者批量生成统一风格的像素素材", skills:["AI 图像","游戏","流程"],
+   d:{te:82,cr:84,us:78,so:55,ae:88,gr:80,ev:66}, comp:{ai:83,hu:80,pe:78,ev:64},
+   prev:14, pts:6700, lv:3, cert:1, badges:["seed","sprout","aes"], stage:"已有用户",
+   oss:true, look:true, rev:1, users:2, isNew:false, helped:3, upd:3, collabs:1, prog:14,
+   bio:"白天上课，晚上做独立游戏。",
+   collabDir:"寻找独立游戏程序与策划。",
+   story:"独立开发者素材产能不足。他做了批量生成统一风格像素素材的工坊，保证风格一致。",
+   feedback:[{t:"一个人也能凑齐一套素材了。",by:"某独立开发者"}], rec:"因为有真实用户价值但传播能力较弱"},
+
+  {id:"m10", name:"第七码头", av:["#1f4a4a","#9ed6cf"], city:"青岛", school:"青岛某高校", team:"第七码头 · 3 人",
+   proj:"潮汐 · 校园二手智能助手", tTech:"编程开发", tBiz:"校园服务", tSocial:"",
+   result:"用 AI 自动归类与定价校园二手物品", skills:["编程","推荐","校园"],
+   d:{te:90,cr:76,us:84,so:62,ae:72,gr:82,ev:76}, comp:{ai:86,hu:84,pe:80,ev:74},
+   prev:7, pts:7300, lv:4, cert:2, badges:["seed","tech","oss","firstpay"], stage:"持续运营",
+   oss:true, look:false, rev:2, users:3, isNew:false, helped:4, upd:3, collabs:2, prog:11,
+   bio:"喜欢把宿舍楼里的真实需求写成代码。",
+   collabDir:"寻找运营与增长方向的伙伴。",
+   story:"校园二手交易效率低。团队用 AI 自动归类与定价，让闲置更快流转。",
+   feedback:[{t:"挂上去半天就出了。",by:"某在校生卖家"}], rec:null},
+
+  {id:"m11", name:"五月森林", av:["#3a6b2f","#bcdf8e"], city:"重庆", school:"重庆某高校", team:"",
+   proj:"五月 · 心理陪伴写作", tTech:"AI 文案", tBiz:"", tSocial:"心理支持",
+   result:"用引导式写作帮同学梳理情绪、缓解压力", skills:["文案","心理","写作"],
+   d:{te:72,cr:82,us:86,so:88,ae:78,gr:80,ev:72}, comp:{ai:80,hu:84,pe:86,ev:70},
+   prev:0, pts:6500, lv:3, cert:1, badges:["seed","sprout","social"], stage:"原型阶段",
+   oss:false, look:true, rev:0, users:1, isNew:true, helped:5, upd:4, collabs:0, prog:28,
+   bio:"想做一个温柔的、不评判的写作空间。",
+   collabDir:"寻找心理学背景同学一起把关边界与安全。",
+   story:"很多同学压力大却难开口。她做了引导式写作工具，帮人把情绪写下来、看清楚，并清晰标注非诊疗用途。",
+   feedback:[{t:"写着写着就没那么慌了。",by:"某在校生"}], rec:"因为对社群帮助很多但不善表达"},
+
+  {id:"m12", name:"一颗种子", av:["#6b5a2c","#e0cf97"], city:"哈尔滨", school:"哈尔滨某高校", team:"",
+   proj:"种子 · 老年数字陪伴", tTech:"AI 产品设计", tBiz:"", tSocial:"老年服务",
+   result:"把复杂 App 操作翻译成大字图文步骤", skills:["产品设计","无障碍","图文"],
+   d:{te:70,cr:78,us:90,so:92,ae:76,gr:86,ev:80}, comp:{ai:82,hu:86,pe:84,ev:78},
+   prev:0, pts:6300, lv:3, cert:2, badges:["seed","sprout","realuser","social"], stage:"已有用户",
+   oss:false, look:true, rev:0, users:2, isNew:true, helped:6, upd:4, collabs:1, prog:26,
+   bio:"教爷爷用手机教了无数遍，于是做了它。",
+   collabDir:"寻找社区志愿者一起补充常用场景。",
+   story:"老人面对复杂 App 无从下手。他做了把操作翻译成大字一步一图指引的小工具，挂号缴费成功率提升。",
+   feedback:[{t:"照着图一步步来，自己能挂号了。",by:"社区老人"}], rec:"因为来自非热门城市，且真实改善了弱势人群体验"},
+
+  {id:"m13", name:"叶脉", av:["#2f6b5a","#9ed6c2"], city:"广州", school:"广州某高校", team:"",
+   proj:"叶脉 · 自动化报表流", tTech:"自动化工作流", tBiz:"企业服务", tSocial:"",
+   result:"把重复的周报数据处理自动化，节省团队时间", skills:["自动化","数据","效率"],
+   d:{te:88,cr:74,us:82,so:60,ae:70,gr:78,ev:80}, comp:{ai:84,hu:82,pe:78,ev:80},
+   prev:6, pts:7100, lv:4, cert:2, badges:["seed","tech","firstpay"], stage:"商业化中",
+   oss:false, look:false, rev:3, users:2, isNew:false, helped:3, upd:2, collabs:2, prog:5,
+   bio:"讨厌重复劳动，所以把它交给机器。",
+   collabDir:"寻找有数据流程痛点的中小企业。",
+   story:"中小团队周报靠手工拼。他做了自动化报表流，把数据清洗与汇总自动化。",
+   feedback:[{t:"周五不用加班拼表了。",by:"某运营负责人"}], rec:null},
+
+  {id:"m14", name:"晨雾", av:["#5a6b7a","#c2d6e6"], city:"沈阳", school:"沈阳某高校", team:"",
+   proj:"晨雾 · 公益组织助手", tTech:"AI 应用开发", tBiz:"", tSocial:"公益传播",
+   result:"帮小型公益组织自动整理活动记录与传播文案", skills:["AI 应用","公益","文案"],
+   d:{te:76,cr:78,us:82,so:90,ae:74,gr:84,ev:72}, comp:{ai:80,hu:82,pe:82,ev:70},
+   prev:0, pts:6100, lv:3, cert:1, badges:["seed","sprout","social"], stage:"原型阶段",
+   oss:true, look:true, rev:0, users:1, isNew:true, helped:4, upd:3, collabs:1, prog:24,
+   bio:"做过志愿者，知道公益组织有多缺人手。",
+   collabDir:"寻找愿意长期参与的志愿伙伴。",
+   story:"小型公益组织人手紧。她做了自动整理活动记录与生成传播文案的助手，让志愿者把时间留给现场。",
+   feedback:[{t:"整理记录的活儿省了大半。",by:"某公益项目协调人"}], rec:"因为帮助了多位社群成员，且专注公共价值"}
+];
+
+/* ---------- 城市林 / 高校林 数据（虚构） ---------- */
+const PLACES = {
+  city:[
+    {nm:"成都", canopy:"#3a7a52", people:128, works:96, monthNew:21, social:14, kw:["教育公平","乡村发展","内容创作"]},
+    {nm:"杭州", canopy:"#2f6b4a", people:156, works:132, monthNew:28, social:11, kw:["电商","自动化","AI 工具"]},
+    {nm:"武汉", canopy:"#4a7a3a", people:112, works:88, monthNew:18, social:16, kw:["无障碍","心理支持","开源"]},
+    {nm:"西安", canopy:"#6b7a3a", people:94, works:70, monthNew:15, social:9, kw:["就业服务","AI 文案","校园服务"]},
+    {nm:"广州", canopy:"#2f7a5a", people:138, works:110, monthNew:24, social:10, kw:["企业服务","数字产品","效率"]},
+    {nm:"重庆", canopy:"#4a6b3a", people:101, works:79, monthNew:17, social:13, kw:["心理支持","文化传承","内容创作"]}
+  ],
+  school:[
+    {nm:"北京某高校", canopy:"#2f6b4a", people:86, works:74, tech:31, idea:22, social:12, oss:18, monthNew:14, kw:["编程开发","智能体","AI 视频"]},
+    {nm:"杭州某高校", canopy:"#3a7a52", people:92, works:81, tech:28, idea:25, social:10, oss:15, monthNew:19, kw:["AI 工具","设计","自动化"]},
+    {nm:"成都某高校", canopy:"#4a7a3a", people:78, works:64, tech:22, idea:19, social:18, oss:12, monthNew:16, kw:["教育公平","乡村发展","公益"]},
+    {nm:"武汉某高校", canopy:"#3a6b4a", people:71, works:58, tech:24, idea:17, social:15, oss:14, monthNew:11, kw:["无障碍","数据分析","开源"]},
+    {nm:"南京某高校", canopy:"#5a7a3a", people:69, works:55, tech:20, idea:23, social:8, oss:9, monthNew:13, kw:["AI 图像","品牌","产品设计"]},
+    {nm:"广州某高校", canopy:"#2f7a5a", people:83, works:67, tech:27, idea:18, social:11, oss:13, monthNew:15, kw:["企业服务","自动化","效率"]}
+  ]
+};
+
+/* ---------- 榜单分类定义 ---------- */
+const BOARDS = [
+  {k:"all",    nm:"综合榜",   sort:"total"},
+  {k:"tech",   nm:"技术榜",   sort:"d.te", subs:["AI 文案","AI 图像","AI 视频","AI 声音","AI 剪辑","Skill 开发","智能体","编程开发","数据分析","自动化工作流","AI 产品设计","AI 应用开发"], subKey:"tTech"},
+  {k:"biz",    nm:"变现榜",   sort:"rev",  subs:["企业服务","AI 工具","智能体服务","内容创作","小红书店铺","闲鱼店铺","校园服务","自由职业","AI 教育","电商","数字产品","商业咨询"], subKey:"tBiz"},
+  {k:"aes",    nm:"审美榜",   sort:"d.ae"},
+  {k:"idea",   nm:"创意榜",   sort:"d.cr"},
+  {k:"social", nm:"社会价值榜", sort:"d.so", subs:["教育公平","乡村发展","老年服务","无障碍","心理支持","就业服务","环境保护","公益传播","文化传承","社区治理","普惠科技","小微企业服务"], subKey:"tSocial"},
+  {k:"new",    nm:"新芽榜",   sort:"new"},
+  {k:"symb",   nm:"共生榜",   sort:"helped"},
+  {k:"growth", nm:"成长榜",   sort:"d.gr"},
+  {k:"city",   nm:"城市林",   sort:"total", placeJump:true},
+  {k:"school", nm:"高校林",   sort:"total", placeJump:true},
+  {k:"team",   nm:"团队榜",   sort:"total", teamOnly:true}
+];
+/* ============================================================
+   工具函数
+   ============================================================ */
+const $  = (s,r=document)=>r.querySelector(s);
+const $$ = (s,r=document)=>Array.from(r.querySelectorAll(s));
+const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
+const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const byId=id=>MEMBERS.find(m=>m.id===id);
+const badgeById=id=>BADGES.find(b=>b.id===id);
+
+/* 本地状态 */
+const STORE_KEY="scl_ai_forest_v1";
+const State={fav:[],votes:{},lastReport:null,tasksDone:[]};
+function loadState(){try{const s=JSON.parse(localStorage.getItem(STORE_KEY));if(s)Object.assign(State,s);}catch(e){}}
+function saveState(){try{localStorage.setItem(STORE_KEY,JSON.stringify(State));}catch(e){}}
+
+/* 综合分 = AI30% + 评委30% + 评议25% + 证据15% */
+function calculateLeaderboardScore(c){
+  return +(c.ai*0.30 + c.hu*0.30 + c.pe*0.25 + c.ev*0.15).toFixed(1);
+}
+MEMBERS.forEach(m=>{ m.total=calculateLeaderboardScore(m.comp); });
+
+/* 头像 */
+function avatar(m,cls=""){
+  return `<span class="avatar ${cls}" style="background:linear-gradient(135deg,${m.av[0]},${m.av[1]})" aria-hidden="true">${esc(m.name.slice(0,1))}</span>`;
+}
+/* 排名变化 */
+function deltaHTML(m,rank){
+  if(m.prev===0) return `<span class="delta charge">新上榜</span>`;
+  const d=m.prev-rank;
+  if(d>0) return `<span class="delta up">▲ ${d}</span>`;
+  if(d<0) return `<span class="delta charge">蓄力中</span>`;
+  return `<span class="delta same">— 持平</span>`;
+}
+function certLabel(n){return ["未认证","初步认证","成果认证","深度认证"][n]||"未认证";}
+const REV_LABEL=["0—1000 元","1000—5000 元","5000—10000 元","1 万—5 万元","5 万元以上"];
+const USERS_LABEL=["暂无用户","1—50","50—500","500—5000","5000 以上"];
+
+/* ============================================================
+   树木 SVG 生成器 —— 数据驱动
+   技术→树干稳定度 · 创意→树形 · 用户价值→树冠 · 社会价值→周边生态
+   持续更新→叶片密度 · 社群贡献→新芽 · 时间→年轮
+   ============================================================ */
+function treeSVG(m,opts={}){
+  const d=m.d;
+  const scale=opts.scale||1;
+  const W=Math.round((opts.w||120)*scale), H=Math.round((opts.h||160)*scale);
+  const cx=W/2;
+  const trunkW=clamp(6+d.te/12,7,16)*scale;          // 技术→树干粗细
+  const trunkH=clamp(40+d.te/2,46,96)*scale;          // 技术→高度
+  const groundY=H-6*scale;
+  const canopyR=clamp(26+d.us/2.4,30,66)*scale;       // 用户价值→树冠
+  const c1=m.av[0], c2=m.av[1];
+  const dom=Math.max(d.te,d.cr,d.us);                  // 主导维度→树形
+  let shape;
+  if(dom===d.cr) shape="bushy"; else if(dom===d.te) shape="tall"; else shape="round";
+
+  let parts="";
+  // 周边生态（社会价值）：地面新芽小草
+  if(d.so>=80){
+    const eco=Math.round((d.so-78)/6);
+    for(let i=0;i<eco;i++){
+      const ex=cx+(i%2?1:-1)*(canopyR*0.7+ i*5*scale);
+      parts+=`<path d="M${ex} ${groundY} q -3 -8 0 -13 q 3 5 0 13z" fill="#7Fae5a" opacity=".7"/>`;
+    }
+  }
+  // 树干（年轮：项目时间→树干上的横纹）
+  const topY=groundY-trunkH;
+  parts+=`<path d="M${cx-trunkW/2} ${groundY} L${cx-trunkW/2*0.6} ${topY} Q${cx} ${topY-4} ${cx+trunkW/2*0.6} ${topY} L${cx+trunkW/2} ${groundY} Z" fill="#6b5436"/>`;
+  parts+=`<path d="M${cx} ${groundY} L${cx} ${topY}" stroke="#4a3a24" stroke-width="${1*scale}" opacity=".4"/>`;
+  // 树冠
+  const ccy=topY-canopyR*0.45;
+  function blob(x,y,r,fill,op){return `<circle cx="${x}" cy="${y}" r="${r}" fill="${fill}" opacity="${op}"/>`;}
+  if(shape==="tall"){
+    parts+=`<path d="M${cx} ${ccy-canopyR*1.1} L${cx-canopyR*0.7} ${ccy+canopyR*0.6} L${cx+canopyR*0.7} ${ccy+canopyR*0.6} Z" fill="${c1}"/>`;
+    parts+=`<path d="M${cx} ${ccy-canopyR*0.6} L${cx-canopyR*0.55} ${ccy+canopyR*0.2} L${cx+canopyR*0.55} ${ccy+canopyR*0.2} Z" fill="${c2}" opacity=".85"/>`;
+  }else if(shape==="bushy"){
+    parts+=blob(cx,ccy,canopyR*0.78,c1,1);
+    parts+=blob(cx-canopyR*0.55,ccy+canopyR*0.15,canopyR*0.6,c1,.95);
+    parts+=blob(cx+canopyR*0.55,ccy+canopyR*0.15,canopyR*0.6,c2,.92);
+    parts+=blob(cx,ccy-canopyR*0.4,canopyR*0.58,c2,.9);
+  }else{
+    parts+=blob(cx,ccy,canopyR*0.92,c1,1);
+    parts+=blob(cx-canopyR*0.35,ccy+canopyR*0.1,canopyR*0.55,c2,.55);
+    parts+=blob(cx+canopyR*0.3,ccy-canopyR*0.2,canopyR*0.45,"#ffffff",.12);
+  }
+  // 叶片密度（持续更新）：小叶点
+  const leaves=Math.round(d.gr/14)+m.upd;
+  for(let i=0;i<leaves;i++){
+    const a=(i/leaves)*Math.PI*2, rr=canopyR*(0.4+0.5*((i*37)%10)/10);
+    const lx=cx+Math.cos(a)*rr, ly=ccy+Math.sin(a)*rr*0.8;
+    parts+=`<circle cx="${lx.toFixed(1)}" cy="${ly.toFixed(1)}" r="${(1.6*scale).toFixed(1)}" fill="#cfe8a0" opacity=".5"/>`;
+  }
+  // 社群贡献（新芽）
+  if(m.helped>=4){
+    parts+=`<path d="M${cx+canopyR*0.6} ${ccy-canopyR*0.5} q 6 -4 10 1 q -5 4 -10 -1z" fill="#B9DC76"/>`;
+  }
+  // 社会价值金点
+  if(m.tSocial){
+    parts+=blob(cx-canopyR*0.7,ccy-canopyR*0.3,2.6*scale,"#D6B76D",.95);
+    parts+=blob(cx+canopyR*0.5,ccy+canopyR*0.5,2.2*scale,"#D6B76D",.9);
+  }
+  return `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${esc(m.name)} 的成长树">${parts}</svg>`;
+}
+
+/* ============================================================
+   AI 模拟评分引擎（前端 Demo）
+   —— 真实接入时，可在此处改为调用后端 / 大模型 API：
+      const res = await fetch('/api/ai-score', {method:'POST', body:...})
+   ============================================================ */
+function calculateAIScore(input){
+  // 各信号 0~1
+  const len=t=>String(t||"").trim().length;
+  const sig={};
+  sig.intro     = clamp(len(input.intro)/180,0,1);
+  sig.problem   = input.problem?1:0;
+  sig.target    = input.target?1:0;
+  sig.tools     = clamp((input.tools||"").split(/[，,、\s]+/).filter(Boolean).length/3,0,1);
+  sig.link      = (input.link||input.repo)?1:0;
+  sig.evidence  = clamp(len(input.evidence)/120,0,1);
+  sig.social    = clamp(len(input.social)/100,0,1);
+  sig.users     = input.users/4;
+  sig.revenue   = input.revenue/4;
+  sig.update    = input.update/4;
+  sig.help      = clamp(input.help/12,0,1);
+  sig.media     = clamp(input.media/3,0,1);
+  const stageBonus={"想法阶段":0,"原型阶段":.25,"已有用户":.6,"持续运营":.8,"商业化中":1}[input.stage]||.3;
+
+  // 七维度
+  const dim={};
+  dim.tech       = Math.round(46 + sig.link*16 + sig.tools*12 + stageBonus*16 + (input.repo?6:0));
+  dim.creativity = Math.round(50 + sig.intro*22 + sig.tools*14 + sig.media*8);
+  dim.userValue  = Math.round(44 + sig.users*24 + sig.problem*12 + sig.target*10 + stageBonus*8);
+  dim.social     = Math.round(40 + sig.social*34 + (input.type.includes("公益")?12:0) + sig.users*8);
+  dim.aesthetics = Math.round(52 + sig.media*22 + sig.intro*12);
+  dim.growth     = Math.round(46 + sig.update*26 + sig.help*16);
+  dim.evidence   = Math.round(38 + sig.evidence*34 + sig.users*14 + sig.link*8);
+  Object.keys(dim).forEach(k=>dim[k]=clamp(dim[k],28,98));
+
+  // 四来源（模拟）
+  const comp={
+    ai:  Math.round((dim.tech+dim.creativity+dim.userValue+dim.evidence)/4),
+    hu:  Math.round((dim.tech+dim.userValue+dim.social+dim.aesthetics)/4),
+    pe:  Math.round((dim.creativity+dim.social+dim.growth)/3),
+    ev:  Math.round((dim.evidence*1.4+dim.userValue*0.6)/2)
+  };
+  Object.keys(comp).forEach(k=>comp[k]=clamp(comp[k],25,97));
+  const total=calculateLeaderboardScore(comp);
+
+  // 证据完整度
+  const completeness=Math.round((sig.intro+sig.problem+sig.target+sig.tools+sig.link+sig.evidence+sig.media)/7*100);
+  // 置信度：信息越全置信越高
+  const confidence=clamp(.5+completeness/280+sig.evidence*.18,.45,.95);
+
+  // 维度强弱
+  const dimNames={tech:"技术完成度",creativity:"创意",userValue:"用户价值",social:"社会价值",aesthetics:"审美表达",growth:"持续成长",evidence:"成果证据"};
+  const sorted=Object.keys(dim).sort((a,b)=>dim[b]-dim[a]);
+  const strengths=sorted.slice(0,2).map(k=>dimNames[k]);
+  const weaknesses=sorted.slice(-2).map(k=>dimNames[k]);
+
+  // 适合榜单 + 预计位次
+  const fits=[];
+  if(dim.tech>=70) fits.push({nm:"技术榜",pct:rankPct(dim.tech)});
+  if(dim.creativity>=70) fits.push({nm:"创意榜",pct:rankPct(dim.creativity)});
+  if(dim.aesthetics>=72) fits.push({nm:"审美榜",pct:rankPct(dim.aesthetics)});
+  if(dim.social>=72) fits.push({nm:"社会价值榜",pct:rankPct(dim.social)});
+  if(input.revenue>=2) fits.push({nm:"变现榜",pct:rankPct(50+input.revenue*10)});
+  if(input.update>=3||completeness<60) fits.push({nm:"新芽榜",pct:rankPct(dim.growth)});
+  if(!fits.length) fits.push({nm:"新芽榜",pct:"前 60%"});
+
+  // 风险/合规
+  const risks=[];
+  if(sig.evidence<0.3) risks.push("成果证据不足，部分结论需人工复核");
+  if(input.revenue>=3 && sig.evidence<0.5) risks.push("较高收入区间建议补充可验证的交付证据");
+  if(!sig.link) risks.push("缺少可访问的项目或开源链接，影响真实性核验");
+  if(confidence<0.7) risks.push("整体信息完整度偏低，AI 置信度不足，结果仅供参考");
+
+  const needReview=[];
+  if(confidence<0.75) needReview.push("AI 置信度低于 0.75，将进入人工复核");
+  if(sig.social>0.4) needReview.push("社会价值类描述建议人工核实受益情况");
+  if(!needReview.length) needReview.push("当前无强制复核项，仍可主动申请人工复核");
+
+  return {dim,dimNames,comp,total,completeness,confidence,strengths,weaknesses,fits,risks,needReview,input};
+}
+function rankPct(v){ if(v>=90)return "前 10%"; if(v>=82)return "前 20%"; if(v>=74)return "前 30%"; if(v>=66)return "前 45%"; return "前 60%"; }
+
+/* 成长任务生成 */
+function generateGrowthTasks(r){
+  const t=[];
+  const s=r.input;
+  const ev=String(s.evidence||"").trim().length;
+  if(ev<120) t.push({tt:"增加至少三个真实用户反馈",ts:"用真实声音替代自我描述",gain:+(3.2).toFixed(1)});
+  if(!s.link&&!s.repo) t.push({tt:"补充可访问的项目或开源链接",ts:"让作品可被真实核验",gain:+(2.6).toFixed(1)});
+  if(s.media<2) t.push({tt:"补充项目演示视频或截图",ts:"提升可信度与移动端展示",gain:+(2.4).toFixed(1)});
+  if(r.dim.evidence<75) t.push({tt:"完善一项可量化的成果数据",ts:"例如节省时间、覆盖人数",gain:+(4.1).toFixed(1)});
+  if(String(s.intro||"").length<160) t.push({tt:"补充从问题发现到方案形成的过程",ts:"说明 AI 与人工各自的贡献",gain:+(1.9).toFixed(1)});
+  if(s.update<3) t.push({tt:"保持连续更新并记录迭代",ts:"持续成长是重要加分项",gain:+(2.2).toFixed(1)});
+  if(t.length<3) t.push({tt:"完成一次公开分享",ts:"把作品讲给更多人听",gain:+(1.8).toFixed(1)});
+  return t.slice(0,5);
+}
+
+/* 推荐生成（潜力森林） */
+function generateRecommendations(){
+  // 价值观：不按热度，发现高潜 / 进步 / 非热门 / 帮助他人 的人
+  return MEMBERS
+    .filter(m=>m.rec)
+    .map(m=>({m,reason:m.rec,score:(m.isNew?20:0)+(m.prog)+(m.helped*1.5)+(m.tSocial?12:0)}))
+    .sort((a,b)=>b.score-a.score)
+    .slice(0,6);
+}
+/* ============================================================
+   渲染：社群数据 / 领航树
+   ============================================================ */
+function renderStats(){
+  const data=[
+    {num:"1,286",unit:"位",label:"活跃青年创造者",sub:"持续创作 · 互相照亮"},
+    {num:"940",unit:"件",label:"上榜与在审作品",sub:"作品先于人气"},
+    {num:"168",unit:"个",label:"社会价值项目",sub:"改变正在发生"},
+    {num:"212",unit:"件",label:"本月新增作品",sub:"森林仍在生长"}
+  ];
+  $("#statsGrid").innerHTML=data.map(s=>`
+    <div class="stat"><div class="num mono-num">${s.num}<small>${s.unit}</small></div>
+    <div class="label">${s.label}</div><div class="sub">${s.sub}</div></div>`).join("");
+}
+
+function renderPodium(){
+  const top=[...MEMBERS].sort((a,b)=>b.total-a.total).slice(0,3);
+  const labels=["本期领航树","持续生长树","新锐创造树"];
+  const order=[1,0,2]; // 视觉：2-1-3
+  $("#podiumGrid").innerHTML=order.map(i=>{
+    const m=top[i], rank=i+1;
+    return `<article class="tree-card is-${rank}" tabindex="0" role="button" data-member="${m.id}" aria-label="查看 ${esc(m.name)} 详情">
+      <span class="crownless">${labels[i]} · 第 ${rank} 名</span>
+      <div class="tree-svg">${treeSVG(m,{scale:rank===1?1.15:1})}</div>
+      <div class="who">${avatar(m)}<div><div class="h3">${esc(m.name)}</div><div class="tiny muted">${esc(m.city)} · ${esc(m.team||m.school)}</div></div></div>
+      <div class="row-proj"><b>${esc(m.proj)}</b> — ${esc(m.result)}</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin:12px 0;">${m.skills.slice(0,3).map(t=>`<span class="chip chip--line">${esc(t)}</span>`).join("")}</div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:6px;">
+        <div><div class="score-big mono-num">${m.total}</div><div class="tiny muted">综合得分</div></div>
+        <div class="tiny" style="text-align:right;color:var(--moss)">成长阶段<br><b style="color:var(--ink)">${LEVELS[m.lv].nm}</b></div>
+      </div>
+      <p class="tiny muted" style="margin-top:12px;padding-top:12px;border-top:1px solid var(--line);">AI 评审摘要：在 ${esc(m.skills[0])} 上表现突出，证据完整，建议持续沉淀真实成果。</p>
+      <div style="display:flex;gap:8px;margin-top:14px;">
+        <button class="btn btn--primary btn--sm" data-project="${m.id}">查看项目</button>
+        <button class="btn btn--ghost btn--sm" data-contact="${m.id}">联系合作</button>
+      </div>
+    </article>`;
+  }).join("");
+}
+
+/* ============================================================
+   渲染：榜单
+   ============================================================ */
+const Board={k:"all",sub:null,q:"",time:"month",scope:"all"};
+function periodAdj(m,time){ // demo：让不同时间段排序产生轻微变化
+  const seed=[...(m.id+time)].reduce((a,c)=>a+c.charCodeAt(0),0);
+  return ((seed%7)-3)*0.6;
+}
+function getVal(m,path){ return path.startsWith("d.")?m.d[path.slice(2)]:m[path]; }
+
+function filterLeaderboard(){
+  const b=BOARDS.find(x=>x.k===Board.k);
+  let list=MEMBERS.slice();
+  if(b.teamOnly) list=list.filter(m=>m.team);
+  if(b.k==="biz") list=list.filter(m=>m.rev>0);
+  if(b.k==="social") list=list.filter(m=>m.tSocial);
+  if(b.k==="new") list=list.filter(m=>m.isNew);
+  if(b.subKey&&Board.sub) list=list.filter(m=>m[b.subKey]===Board.sub);
+  // 范围
+  if(Board.scope==="certified") list=list.filter(m=>m.cert>=2);
+  else if(Board.scope==="opensource") list=list.filter(m=>m.oss);
+  else if(Board.scope==="social") list=list.filter(m=>m.tSocial);
+  else if(Board.scope==="commercial") list=list.filter(m=>m.rev>=2);
+  // 搜索
+  if(Board.q){
+    const q=Board.q.toLowerCase();
+    list=list.filter(m=>[m.name,m.city,m.school,m.team,m.proj,m.result,m.tTech,m.tBiz,m.tSocial,...m.skills].join(" ").toLowerCase().includes(q));
+  }
+  // 排序
+  const s=b.sort;
+  list.sort((a,bb)=>{
+    if(s==="new"){ if(a.isNew!==bb.isNew)return bb.isNew-a.isNew; return bb.prog-a.prog; }
+    if(s==="rev"){ if(bb.rev!==a.rev)return bb.rev-a.rev; return bb.total-a.total; }
+    if(s==="helped") return bb.helped-a.helped;
+    if(s.startsWith("d.")) return getVal(bb,s)-getVal(a,s);
+    return (bb.total+periodAdj(bb,Board.time))-(a.total+periodAdj(a,Board.time));
+  });
+  return list;
+}
+
+function renderTabs(){
+  $("#boardTabs").innerHTML=BOARDS.map(b=>
+    `<button class="tab ${b.k===Board.k?'active':''}" role="tab" aria-selected="${b.k===Board.k}" data-board="${b.k}">${b.nm}</button>`).join("");
+  renderSubtabs();
+}
+function renderSubtabs(){
+  const b=BOARDS.find(x=>x.k===Board.k);
+  const box=$("#subTabs");
+  if(!b.subs){box.innerHTML="";return;}
+  box.innerHTML=`<button class="subtab ${!Board.sub?'active':''}" data-sub="">全部</button>`+
+    b.subs.map(s=>`<button class="subtab ${Board.sub===s?'active':''}" data-sub="${esc(s)}">${esc(s)}</button>`).join("");
+}
+function renderBoard(){
+  const b=BOARDS.find(x=>x.k===Board.k);
+  const list=filterLeaderboard();
+  const box=$("#boardList");
+  let banner="";
+  if(b.placeJump){
+    banner=`<div class="card" style="padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+      <span class="tiny muted">${b.nm}按地区/高校呈现创造密度。下方为该维度成员排序，完整林地视图见“城市林 · 高校林”。</span>
+      <button class="btn btn--ghost btn--sm" data-jump="places">进入${b.nm}视图 →</button></div>`;
+  }
+  if(!list.length){ box.innerHTML=banner+`<div class="empty">没有符合条件的作品。试着切换榜单或清空搜索。<br><span class="tiny">今天没有上榜的人，也可能是明天改变世界的人。</span></div>`; return; }
+  box.innerHTML=banner+list.map((m,i)=>{
+    const rank=i+1;
+    const faved=State.fav.includes(m.id);
+    return `<article class="row" data-member="${m.id}" tabindex="0" role="button" aria-label="查看 ${esc(m.name)} 详情" style="animation-delay:${Math.min(i*40,400)}ms">
+      <div class="row-rank"><span class="n mono-num">${rank}</span>${deltaHTML(m,rank)}</div>
+      <div class="row-main">
+        <div class="row-id">${avatar(m,"avatar--sm")}
+          <div><div class="name">${esc(m.name)}${m.cert>=2?` <span class="cert">· <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>${certLabel(m.cert)}</span>`:''}</div>
+          <div class="row-meta"><span>${esc(m.city)}</span><span>${esc(m.team||m.school)}</span><span>${esc(m.tTech)}</span><span>Lv.${m.lv+1} ${LEVELS[m.lv].nm}</span></div></div>
+        </div>
+        <div class="row-proj"><b>${esc(m.proj)}</b> — ${esc(m.result)}</div>
+        <div class="row-tags">${m.skills.map(t=>`<span class="chip chip--line">${esc(t)}</span>`).join("")}${m.oss?'<span class="chip chip--sprout">开源</span>':''}${m.look?'<span class="chip">寻找合作</span>':''}</div>
+      </div>
+      <div class="row-side">
+        <div><div class="row-score mono-num">${m.total}</div><small>AI ${m.comp.ai} · 评委 ${m.comp.hu}</small></div>
+        <div class="row-quick">
+          <button class="minibtn ${faved?'on':''}" data-fav="${m.id}" aria-label="收藏" title="收藏"><svg width="16" height="16" viewBox="0 0 24 24" fill="${faved?'currentColor':'none'}"><path d="M12 17.3l-5.4 3 1-6-4.4-4.2 6-.9L12 3l2.8 6 6 .9-4.4 4.2 1 6z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></button>
+          <button class="minibtn" data-vote="${m.id}" aria-label="投票评议" title="投票评议"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 13l4 4L20 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button class="minibtn" data-share="${m.id}" aria-label="分享" title="分享"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M8 12l8-5M8 12l8 5M8 12a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zm13-6.5a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zm0 13a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" stroke="currentColor" stroke-width="1.6"/></svg></button>
+        </div>
+      </div>
+    </article>`;
+  }).join("");
+}
+/* ---------- 勋章抽象图标 ---------- */
+function badgeIcon(sym,s=54){
+  const g=`<defs><linearGradient id="bg_${sym}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5E7565"/><stop offset="1" stop-color="#B9DC76"/></linearGradient></defs>`;
+  const ring=`<circle cx="27" cy="27" r="25" fill="none" stroke="url(#bg_${sym})" stroke-width="2.4" opacity=".5"/>`;
+  const M={
+    seed:`<path d="M27 40V24" stroke="url(#bg_${sym})" stroke-width="3" stroke-linecap="round"/><path d="M27 28c-7 0-12-5-12-12 7 0 12 5 12 12z" fill="url(#bg_${sym})"/>`,
+    sprout:`<path d="M27 42V22" stroke="url(#bg_${sym})" stroke-width="3" stroke-linecap="round"/><path d="M27 26c-6 0-10-4-10-10 6 0 10 4 10 10z" fill="#5E7565"/><path d="M27 30c6 0 10-4 10-10-6 0-10 4-10 10z" fill="#B9DC76"/>`,
+    rings:`<circle cx="27" cy="27" r="6" fill="none" stroke="url(#bg_${sym})" stroke-width="2"/><circle cx="27" cy="27" r="12" fill="none" stroke="url(#bg_${sym})" stroke-width="2" opacity=".7"/><circle cx="27" cy="27" r="18" fill="none" stroke="url(#bg_${sym})" stroke-width="2" opacity=".4"/>`,
+    leaf:`<path d="M16 38C16 24 28 16 40 16 40 30 28 38 16 38z" fill="url(#bg_${sym})"/><path d="M18 36L38 18" stroke="#10251B" stroke-width="1.4" opacity=".3"/>`,
+    coin:`<circle cx="27" cy="27" r="14" fill="none" stroke="url(#bg_${sym})" stroke-width="2.6"/><path d="M27 19v16M22 23h7a3 3 0 010 6h-7" stroke="url(#bg_${sym})" stroke-width="2" stroke-linecap="round" fill="none"/>`,
+    branch:`<path d="M27 42V14" stroke="url(#bg_${sym})" stroke-width="2.6" stroke-linecap="round"/><path d="M27 26l9-7M27 32l-8-6M27 20l7-6" stroke="url(#bg_${sym})" stroke-width="2.4" stroke-linecap="round"/>`,
+    hands:`<path d="M14 30c4-6 9-4 13 0 4-4 9-6 13 0-4 8-13 12-13 12S18 38 14 30z" fill="url(#bg_${sym})"/>`,
+    spark:`<path d="M27 12l4 11 11 4-11 4-4 11-4-11-11-4 11-4z" fill="url(#bg_${sym})"/>`,
+    heart:`<path d="M27 40S14 32 14 22a7 7 0 0113-3 7 7 0 0113 3c0 10-13 18-13 18z" fill="url(#bg_${sym})"/>`,
+    flower:`<g fill="url(#bg_${sym})"><circle cx="27" cy="18" r="6"/><circle cx="18" cy="28" r="6"/><circle cx="36" cy="28" r="6"/><circle cx="27" cy="36" r="6"/></g><circle cx="27" cy="27" r="4" fill="#10251B" opacity=".4"/>`,
+    root:`<path d="M27 12v18M27 30c0 6-6 8-10 12M27 30c0 6 6 8 10 12M27 22l-7 4M27 22l7 4" stroke="url(#bg_${sym})" stroke-width="2.4" stroke-linecap="round" fill="none"/>`,
+    crown:`<path d="M14 36l-2-16 9 8 6-12 6 12 9-8-2 16z" fill="url(#bg_${sym})"/>`,
+    forest:`<g fill="url(#bg_${sym})"><path d="M18 40l-6-12 6-10 6 10z"/><path d="M34 40l-6-14 6-11 6 11z"/></g>`,
+    globe:`<circle cx="27" cy="27" r="14" fill="none" stroke="url(#bg_${sym})" stroke-width="2.4"/><path d="M13 27h28M27 13c5 6 5 22 0 28M27 13c-5 6-5 22 0 28" stroke="url(#bg_${sym})" stroke-width="1.8" fill="none"/>`
+  };
+  return `<svg viewBox="0 0 54 54" width="${s}" height="${s}" role="img" aria-hidden="true">${g}${ring}${M[sym]||M.seed}</svg>`;
+}
+
+/* ---------- 评审官权重 / 职责 ---------- */
+function renderJudge(){
+  $("#weights").innerHTML=WEIGHTS.map(w=>`
+    <div class="weight-row"><div class="wt-label">${w.label}<small>${w.sub}</small></div>
+    <div class="weight-bar"><i data-w="${w.pct}" style="background:${w.color}"></i></div>
+    <div class="wt-pct">${w.pct}%</div></div>`).join("");
+  $("#judgePoints").innerHTML=JUDGE_POINTS.map(p=>`
+    <div class="jp"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>${esc(p)}</span></div>`).join("");
+}
+
+/* ---------- 潜力森林 ---------- */
+function renderRecs(){
+  const recs=generateRecommendations();
+  $("#recGrid").innerHTML=recs.map(({m,reason})=>`
+    <article class="card rec-card" data-member="${m.id}" tabindex="0" role="button" aria-label="查看 ${esc(m.name)} 详情">
+      <div class="row-id">${avatar(m,"avatar--sm")}<div><div class="name" style="font-weight:640">${esc(m.name)}</div><div class="tiny muted">${esc(m.city)} · ${esc(m.school)}</div></div></div>
+      <div class="row-proj"><b>${esc(m.proj)}</b><br><span class="muted tiny">${esc(m.result)}</span></div>
+      <div class="rec-why"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v2M5 12H3M21 12h-2M6 6L4.5 4.5M18 6l1.5-1.5M9 18h6M10 21h4M12 7a5 5 0 00-3 9h6a5 5 0 00-3-9z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span>${esc(reason)}</span></div>
+      <div class="rec-foot"><span class="tiny muted">综合 <b style="color:var(--pine-deep)">${m.total}</b></span><span class="tiny" style="color:var(--moss)">查看成长档案 →</span></div>
+    </article>`).join("");
+}
+
+/* ---------- 作品森林 ---------- */
+const ForestF={k:"all"};
+const FOREST_FILTERS=[
+  {k:"all",nm:"全部"},{k:"oss",nm:"开源"},{k:"look",nm:"寻找合作"},{k:"social",nm:"社会价值"},
+  {k:"biz",nm:"商业成果"},{k:"new",nm:"新成员"},{k:"tech",nm:"高技术完成度"}
+];
+function renderForestFilters(){
+  $("#forestFilters").innerHTML=FOREST_FILTERS.map(f=>`<button class="tab ${f.k===ForestF.k?'active':''}" data-ff="${f.k}">${f.nm}</button>`).join("");
+}
+function renderForest(){
+  let list=MEMBERS.slice();
+  const k=ForestF.k;
+  if(k==="oss") list=list.filter(m=>m.oss);
+  else if(k==="look") list=list.filter(m=>m.look);
+  else if(k==="social") list=list.filter(m=>m.tSocial);
+  else if(k==="biz") list=list.filter(m=>m.rev>=2);
+  else if(k==="new") list=list.filter(m=>m.isNew);
+  else if(k==="tech") list=list.filter(m=>m.d.te>=82);
+  const box=$("#forestTrees");
+  if(!list.length){box.innerHTML='<p class="muted" style="margin:auto;">这一类暂时还没有树，换个筛选看看。</p>';return;}
+  box.innerHTML=list.map(m=>{
+    const sc=clamp(0.7+m.total/160,0.7,1.25);
+    return `<button class="ftree" data-project="${m.id}" aria-label="${esc(m.name)} · ${esc(m.proj)}" title="${esc(m.name)} · ${esc(m.proj)}">${treeSVG(m,{scale:sc,w:90,h:150})}</button>`;
+  }).join("");
+}
+
+/* ---------- 城市林 / 高校林 ---------- */
+const PlaceState={k:"city"};
+function renderPlaces(){
+  const isCity=PlaceState.k==="city";
+  const list=PLACES[PlaceState.k];
+  $("#placeGrid").innerHTML=list.map(p=>{
+    const m=isCity?`
+      <div class="pm"><div class="n mono-num">${p.people}</div><div class="l">参与人数</div></div>
+      <div class="pm"><div class="n mono-num">${p.works}</div><div class="l">作品数量</div></div>
+      <div class="pm"><div class="n mono-num">${p.monthNew}</div><div class="l">本月新增</div></div>
+      <div class="pm"><div class="n mono-num">${p.social}</div><div class="l">社会价值项目</div></div>`
+    :`
+      <div class="pm"><div class="n mono-num">${p.works}</div><div class="l">作品数量</div></div>
+      <div class="pm"><div class="n mono-num">${p.tech}</div><div class="l">技术项目</div></div>
+      <div class="pm"><div class="n mono-num">${p.idea}</div><div class="l">创意项目</div></div>
+      <div class="pm"><div class="n mono-num">${p.oss}</div><div class="l">开源项目</div></div>`;
+    return `<article class="card place-card">
+      <div class="place-head"><div><div class="h3">${esc(p.nm)}</div><div class="tiny muted">${isCity?'城市林':'高校林'}</div></div>
+        <svg class="place-canopy" viewBox="0 0 46 46" aria-hidden="true"><path d="M23 44V28" stroke="#6b5436" stroke-width="3"/><circle cx="23" cy="20" r="14" fill="${p.canopy}"/><circle cx="15" cy="24" r="8" fill="${p.canopy}" opacity=".7"/><circle cx="31" cy="24" r="8" fill="${p.canopy}" opacity=".7"/></svg>
+      </div>
+      <div class="place-metrics">${m}</div>
+      <div class="place-kw">${p.kw.map(k=>`<span class="chip chip--line">${esc(k)}</span>`).join("")}</div>
+      <p class="tiny muted" style="margin-top:14px;">${isCity?'欢迎在此发起本地合作与线下分享。':'代表创造与共创密度，不代表学校之间的优劣。'}</p>
+    </article>`;
+  }).join("");
+}
+
+/* ---------- 成长等级 / 勋章 / 故事 / 原则 / 透明 ---------- */
+function renderLevels(){
+  const ic=["seed","sprout","branch","leaf","forest","hands","globe"];
+  $("#levelTrack").innerHTML=LEVELS.map((l,i)=>`
+    <div class="level"><span class="seq">${i+1}</span><div class="ic">${badgeIcon(ic[i],40)}</div>
+    <div class="nm">${esc(l.nm)}</div><div class="st">${esc(l.st)}</div></div>`).join("");
+}
+function renderBadges(){
+  $("#badgeGrid").innerHTML=BADGES.map(b=>`
+    <button class="badge" data-badge="${b.id}" aria-label="${esc(b.nm)} 勋章详情">
+      <div class="ic">${badgeIcon(b.sym)}</div><div class="nm">${esc(b.nm)}</div><div class="ds">${esc(b.ds)}</div>
+      <span class="rare r${b.rare}">${["","常见","进阶","稀有"][b.rare]}</span></button>`).join("");
+}
+function renderStories(){
+  $("#storyGrid").innerHTML=STORIES.map(s=>`
+    <article class="card story">
+      <span class="topic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21S4 14 4 8a4 4 0 018-1 4 4 0 018 1c0 6-8 13-8 13z" stroke="currentColor" stroke-width="1.8"/></svg>${esc(s.topic)}</span>
+      <div class="q">${esc(s.q)}</div>
+      <dl><dt>谁受影响</dt><dd>${esc(s.who)}</dd><dt>创作者做了</dt><dd>${esc(s.did)}</dd><dt>AI 做了</dt><dd>${esc(s.ai)}</dd><dt>已发生的改变</dt><dd>${esc(s.change)}</dd></dl>
+      <div class="need"><b>还需要：</b>${esc(s.need)}</div>
+      <button class="btn btn--ghost btn--sm" data-jump="lab" style="align-self:flex-start;">我也想参与这样的合作</button>
+    </article>`).join("");
+}
+function renderFair(){
+  $("#principles").innerHTML=PRINCIPLES.map((p,i)=>`
+    <div class="principle"><span class="pn">${i+1}</span><span>${esc(p)}</span></div>`).join("");
+  $("#transGrid").innerHTML=TRANS.stats.map(t=>`<div class="trans"><div class="n mono-num">${esc(t.n)}</div><div class="l">${esc(t.l)}</div></div>`).join("");
+  $("#transMeta").innerHTML=TRANS.meta.map(([k,v])=>`<span>${esc(k)}：<b>${esc(v)}</b></span>`).join("");
+}
+/* ============================================================
+   Overlay 管理 + 焦点 + ESC
+   ============================================================ */
+let lastFocus=null;
+function openOverlay(id){
+  const el=$("#"+id); if(!el)return;
+  lastFocus=document.activeElement;
+  el.classList.add("open");
+  document.body.style.overflow="hidden";
+  const f=el.querySelector("button,a,input,select,textarea,[tabindex]");
+  if(f) setTimeout(()=>f.focus(),60);
+}
+function closeOverlay(el){
+  el.classList.remove("open");
+  if(!$$(".overlay.open").length){document.body.style.overflow="";}
+  if(lastFocus&&lastFocus.focus){try{lastFocus.focus();}catch(e){}}
+}
+function closeTop(){
+  const open=$$(".overlay.open");
+  if(open.length){closeOverlay(open[open.length-1]);return true;}
+  const mm=$("#mobileMenu");
+  if(mm.classList.contains("open")){toggleMobile(false);return true;}
+  return false;
+}
+
+/* ============================================================
+   Toast + 新叶动效
+   ============================================================ */
+let toastT;
+function toast(msg,leaf){
+  const w=$("#toastWrap");
+  const t=document.createElement("div");
+  t.className="toast";
+  t.innerHTML=(leaf?'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19C5 11 12 6 19 6c0 8-7 13-14 13z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>':'')+`<span>${esc(msg)}</span>`;
+  w.appendChild(t);
+  requestAnimationFrame(()=>t.classList.add("show"));
+  setTimeout(()=>{t.classList.remove("show");setTimeout(()=>t.remove(),400);},2600);
+}
+function growLeaf(x,y){
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  const l=document.createElement("div");
+  l.className="newleaf";
+  l.style.left=x+"px";l.style.top=y+"px";
+  l.innerHTML='<svg width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M5 19C5 11 12 6 19 6c0 8-7 13-14 13z" fill="#B9DC76"/><path d="M7 17C9 12 14 9 17 8" stroke="#3d5a23" stroke-width="1.2"/></svg>';
+  document.body.appendChild(l);
+  setTimeout(()=>l.remove(),1200);
+}
+
+/* ============================================================
+   成员详情 / 个人主页 抽屉
+   ============================================================ */
+function openMember(id){
+  const m=byId(id); if(!m)return;
+  const rank=[...MEMBERS].sort((a,b)=>b.total-a.total).findIndex(x=>x.id===id)+1;
+  const faved=State.fav.includes(m.id);
+  const ringsH=[...m.skills,m.proj].map((_,i)=>`<i style="height:${20+((m.total+i*9)%34)}px"></i>`).join("")+
+    Array.from({length:6}).map((_,i)=>`<i style="height:${16+((m.pts/100+i*7)%34)}px"></i>`).join("");
+  $("#memberDrawerBody").innerHTML=`
+    <div class="drawer-hero">
+      <div class="who">${avatar(m,"avatar--lg")}<div>
+        <div class="nm">${esc(m.name)}</div>
+        <div class="meta">${esc(m.city)} · ${esc(m.team||m.school)}</div>
+        <span class="level-pill">${badgeIcon(["seed","sprout","branch","leaf","forest","hands","globe"][m.lv],16)} Lv.${m.lv+1} ${LEVELS[m.lv].nm}</span>
+      </div></div>
+      <p style="color:rgba(243,245,239,.82);font-size:14px;margin-top:16px;line-height:1.6;">${esc(m.bio)}</p>
+      <div class="drawer-stats">
+        <div class="s"><div class="n mono-num">${m.total}</div><div class="l">综合得分</div></div>
+        <div class="s"><div class="n mono-num">#${rank}</div><div class="l">当前位次</div></div>
+        <div class="s"><div class="n mono-num">${m.pts.toLocaleString()}</div><div class="l">总积分</div></div>
+        <div class="s"><div class="n mono-num">${m.helped}</div><div class="l">帮助他人</div></div>
+      </div>
+    </div>
+    <div class="drawer-body">
+      <div class="dsec"><h4>代表项目</h4>
+        <div class="card" style="padding:16px;"><b>${esc(m.proj)}</b> <span class="chip chip--line">${esc(m.tTech)}</span>
+        <p class="tiny muted" style="margin-top:8px;">${esc(m.result)}</p>
+        <button class="btn btn--ghost btn--sm" data-project="${m.id}" style="margin-top:10px;">查看项目详情 →</button></div></div>
+
+      <div class="dsec"><h4>技能标签</h4><div class="tag-list" style="display:flex;flex-wrap:wrap;gap:7px;">${m.skills.map(s=>`<span class="chip">${esc(s)}</span>`).join("")}</div></div>
+
+      <div class="dsec"><h4>勋章墙</h4><div class="badge-mini-wall">${m.badges.map(bid=>{const b=badgeById(bid);return b?`<span class="badge-mini" title="${esc(b.ds)}">${badgeIcon(b.sym,18)} ${esc(b.nm)}</span>`:'';}).join("")}</div></div>
+
+      <div class="dsec"><h4>成长年轮</h4><div class="rings" aria-label="成长年轮示意">${ringsH}</div>
+        <p class="tiny muted" style="margin-top:8px;">连续成长 · 累计上传 ${m.skills.length+3} 件作品 · 历史最高 #${Math.max(1,(m.prev||rank)-1)}</p></div>
+
+      <div class="dsec"><h4>AI 评审报告（摘要）</h4>
+        <dl class="kv"><dt>AI 评分</dt><dd>${m.comp.ai}</dd><dt>专业评委</dt><dd>${m.comp.hu}</dd><dt>成员评议</dt><dd>${m.comp.pe}</dd><dt>成果证据</dt><dd>${m.comp.ev}</dd><dt>成果认证</dt><dd>${certLabel(m.cert)}</dd></dl>
+        <button class="btn btn--ghost btn--sm" id="openCriteria3" style="margin-top:10px;">查看评分标准与可解释理由 →</button></div>
+
+      <div class="dsec"><h4>真实成果与用户反馈</h4>${m.feedback.map(f=>`<div class="feedback">“${esc(f.t)}”<div class="by">— ${esc(f.by)}</div></div>`).join("")}
+        <p class="tiny muted">收入区间：${REV_LABEL[m.rev]} · 用户规模：${USERS_LABEL[m.users]}${m.oss?' · 已开源':''}</p></div>
+
+      <div class="dsec"><h4>合作方向</h4><p class="tiny" style="color:var(--ink-soft)">${esc(m.collabDir)}</p></div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+        <button class="btn btn--primary btn--sm" data-contact="${m.id}">发起合作</button>
+        <button class="btn btn--ghost btn--sm" data-vote="${m.id}">投票评议</button>
+        <button class="btn btn--ghost btn--sm" data-share="${m.id}">分享主页</button>
+        <button class="btn btn--ghost btn--sm" data-fav="${m.id}">${faved?'已收藏':'收藏'}</button>
+      </div>
+      <p class="tiny muted" style="margin-top:16px;">仅展示成员主动公开的信息。不公开私人手机号与邮箱；城市可隐藏，高校可模糊；AI 报告可公开或私密，并可申请删除。本页为虚构示例。</p>
+    </div>`;
+  openOverlay("memberDrawer");
+}
+
+/* ============================================================
+   项目详情弹窗
+   ============================================================ */
+function openProject(id){
+  const m=byId(id); if(!m)return;
+  const d=m.d, dimNames={te:"技术完成度",cr:"创意",us:"用户价值",so:"社会价值",ae:"审美表达",gr:"持续成长",ev:"成果证据"};
+  $("#projectModalBody").innerHTML=`
+    <div style="display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap;">
+      <div style="flex-shrink:0;">${treeSVG(m,{scale:1,w:110,h:150})}</div>
+      <div style="flex:1;min-width:200px;">
+        <span class="eyebrow">作品森林 · 项目详情</span>
+        <h3 class="h2" style="margin:8px 0 4px;">${esc(m.proj)}</h3>
+        <p class="muted">${esc(m.name)} · ${esc(m.city)} · ${esc(m.team||m.school)}</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin:12px 0;">${m.skills.map(s=>`<span class="chip">${esc(s)}</span>`).join("")}${m.oss?'<span class="chip chip--sprout">开源</span>':''}${m.tSocial?`<span class="chip chip--gold">${esc(m.tSocial)}</span>`:''}</div>
+      </div>
+    </div>
+    <p class="lead" style="font-size:16px;margin:14px 0;">${esc(m.story)}</p>
+    <div class="grid grid-2" style="gap:14px;margin:18px 0;">
+      <div class="card" style="padding:16px;"><h4 class="tiny" style="color:var(--moss);font-weight:660;margin-bottom:10px;">维度雷达（条形）</h4>
+        ${Object.keys(d).map(k=>`<div style="margin:7px 0;"><div style="display:flex;justify-content:space-between;font-size:12.5px;"><span>${dimNames[k]}</span><b>${d[k]}</b></div><div class="weight-bar"><i style="width:${d[k]}%;background:linear-gradient(90deg,#5E7565,#B9DC76)"></i></div></div>`).join("")}</div>
+      <div class="card" style="padding:16px;"><h4 class="tiny" style="color:var(--moss);font-weight:660;margin-bottom:10px;">关键信息</h4>
+        <dl class="kv"><dt>项目阶段</dt><dd>${esc(m.stage)}</dd><dt>目标用户</dt><dd>${esc(m.result)}</dd><dt>用户规模</dt><dd>${USERS_LABEL[m.users]}</dd><dt>收入区间</dt><dd>${REV_LABEL[m.rev]}</dd><dt>成果认证</dt><dd>${certLabel(m.cert)}</dd><dt>合作数量</dt><dd>${m.collabs} 次</dd><dt>合作意向</dt><dd>${m.look?'正在寻找合作':'暂不开放'}</dd></dl></div>
+    </div>
+    <div class="card" style="padding:16px;margin-bottom:14px;"><h4 class="tiny" style="color:var(--moss);font-weight:660;margin-bottom:8px;">真实用户反馈</h4>
+      ${m.feedback.map(f=>`<div class="feedback">“${esc(f.t)}”<div class="by">— ${esc(f.by)}</div></div>`).join("")}</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <button class="btn btn--primary btn--sm" data-member="${m.id}">查看创作者主页</button>
+      <button class="btn btn--ghost btn--sm" data-contact="${m.id}">联系合作</button>
+      <button class="btn btn--ghost btn--sm" data-vote="${m.id}">投票评议</button>
+      <button class="btn btn--ghost btn--sm" data-share="${m.id}">分享项目</button>
+    </div>
+    <p class="tiny muted" style="margin-top:14px;">项目材料由本人授权展示，仅用于榜单与发现。本项目为虚构示例。</p>`;
+  openOverlay("projectModal");
+}
+
+/* ============================================================
+   勋章弹窗
+   ============================================================ */
+function openBadge(id){
+  const b=badgeById(id); if(!b)return;
+  const holders=MEMBERS.filter(m=>m.badges.includes(id)).slice(0,4);
+  $("#badgeModalBody").innerHTML=`
+    <div style="text-align:center;">
+      <div style="width:88px;height:88px;margin:0 auto 14px;">${badgeIcon(b.sym,88)}</div>
+      <h3 class="h2">${esc(b.nm)}</h3>
+      <span class="rare r${b.rare}" style="margin-top:8px;display:inline-block;">${["","常见","进阶","稀有"][b.rare]}勋章</span>
+    </div>
+    <dl class="kv" style="margin:20px 0;">
+      <dt>获得条件</dt><dd>${esc(b.ds)}</dd>
+      <dt>示例获得日期</dt><dd>2026-05-18</dd>
+      <dt>对应作品</dt><dd>${holders.length?esc(holders[0].proj):'—'}</dd>
+      <dt>是否认证</dt><dd>已认证</dd>
+      <dt>稀有程度</dt><dd>${["","常见","进阶","稀有"][b.rare]}</dd>
+    </dl>
+    <div class="card" style="padding:14px;background:var(--accent-soft);border:none;">
+      <h4 class="tiny" style="color:var(--moss);font-weight:660;margin-bottom:6px;">背后的成长故事</h4>
+      <p class="tiny" style="color:var(--ink-soft);line-height:1.6;">${esc(b.story)}</p>
+    </div>
+    ${holders.length?`<div style="margin-top:16px;"><h4 class="tiny" style="color:var(--moss);font-weight:660;margin-bottom:8px;">部分获得者</h4>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">${holders.map(m=>`<button class="badge-mini" data-member="${m.id}">${avatar(m,"avatar--sm")} ${esc(m.name)}</button>`).join("")}</div></div>`:''}`;
+  openOverlay("badgeModal");
+}
+
+/* ============================================================
+   评分标准弹窗（含一份示例评分详情）
+   ============================================================ */
+function openCriteria(){
+  const sample=MEMBERS[0];
+  $("#criteriaModalBody").innerHTML=`
+    <span class="eyebrow">AI 评审官 · 评分标准</span>
+    <h3 class="h2" style="margin:8px 0 6px;">公开的评分标准</h3>
+    <p class="muted tiny">不同赛道使用不同模型，但都遵循以下结构化维度。每一项都可解释、可复核、可申诉。</p>
+    <div style="margin:18px 0;">${CRITERIA.map(c=>`
+      <div class="crit"><div class="crit-head"><span class="cn">${esc(c.cn)} <span class="chip chip--line">${c.weight}</span></span></div>
+      <div class="reason">${esc(c.reason)}</div><div class="evid">引用证据：${esc(c.evid)}</div></div>`).join("")}</div>
+    <h3 class="h3" style="margin:18px 0 10px;">一份示例评分详情</h3>
+    <div class="card" style="padding:16px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+        <div><b>${esc(sample.name)} · ${esc(sample.proj)}</b><div class="tiny muted">${esc(sample.tTech)}</div></div>
+        <div style="text-align:right;"><div class="row-score mono-num">${sample.total}</div><div class="tiny muted">综合得分</div></div>
+      </div>
+      <div class="crit" style="margin-top:14px;"><div class="crit-head"><span class="cn">真实性与证据</span><span class="cs">${sample.comp.ev}/100</span></div>
+        <div class="reason">提供了服务教师数量、节省时间比例与多条真实反馈，证据较完整。</div>
+        <div class="evid">引用：成果证据字段、23 位教师、节省约 6 小时/周</div></div>
+      <div class="crit"><div class="crit-head"><span class="cn">用户价值</span><span class="cs">${sample.d.us}/100</span></div>
+        <div class="reason">目标用户明确，解决的问题真实且高频，价值落到具体场景。</div>
+        <div class="evid">引用：目标用户=乡村教师；问题=备课耗时</div></div>
+      <div class="audit">
+        <div>AI 置信度<b>0.89</b></div><div>可能偏差<b>偏向有证据者</b></div>
+        <div>人工复核<b>已通过</b></div><div>模型版本<b>v2.6</b></div>
+        <div>评分时间<b>2026-06-10</b></div><div>申诉入口<b>可申请重新评分</b></div>
+      </div>
+    </div>
+    <div class="card" style="padding:14px;margin-top:14px;background:var(--accent-soft);border:none;">
+      <p class="tiny" style="color:var(--ink-soft);line-height:1.6;"><b>AI 负责提高评审效率，但不拥有对一个人的最终定义权。</b> 任何重要判断都应该可以解释、可以复核、可以申诉。AI 低置信度结果会自动进入人工复核。</p>
+    </div>`;
+  openOverlay("criteriaModal");
+}
+/* ============================================================
+   投票评议
+   ============================================================ */
+const VOTE_REASONS=["作品真实、有证据","解决了真实问题","有独特创意","审美与表达出色","对社群有帮助","具有社会价值","持续成长明显"];
+let voteCtx={id:null,reason:""};
+function openVote(id){
+  const m=byId(id); if(!m)return;
+  voteCtx={id,reason:""};
+  const voted=State.votes[id];
+  $("#voteModalBody").innerHTML=`
+    <span class="eyebrow">投票打榜 · 不搞拉票</span>
+    <h3 class="h2" style="margin:8px 0 6px;">为 ${esc(m.name)} 的创造投出一票</h3>
+    <div class="card" style="padding:14px;display:flex;gap:12px;align-items:center;margin:14px 0;">
+      ${avatar(m,"avatar--sm")}<div><b>${esc(m.proj)}</b><div class="tiny muted">${esc(m.result)}</div></div></div>
+    <div class="vote-rules">
+      ${["评议前需查看作品与成果证据","每次评议需选择或填写理由","投票阶段隐藏实时票数","不允许给自己投票，粉丝数与转发量不计入","异常集中投票与批量重复理由将进入人工复核"].map(r=>`<div class="vote-rule"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>${esc(r)}</span></div>`).join("")}
+    </div>
+    <label class="tiny" style="font-weight:600;color:var(--ink-soft);">选择你的评议理由（必填）</label>
+    <div class="reason-opts" id="reasonOpts">${VOTE_REASONS.map(r=>`<button type="button" class="reason-opt" data-reason="${esc(r)}">${esc(r)}</button>`).join("")}</div>
+    <textarea class="ta" id="voteNote" placeholder="可补充一句具体理由（可选）" style="background:var(--card);border:1px solid var(--line);color:var(--ink);width:100%;border-radius:12px;padding:11px 14px;min-height:60px;"></textarea>
+    <button class="btn btn--primary btn--block" id="voteSubmit" style="margin-top:14px;" ${voted?'disabled':''}>${voted?'本期已对该成员评议':'确认投票评议'}</button>
+    <p class="tiny muted" style="margin-top:10px;">仅完成身份验证的成员可参与正式评议；候选人顺序随机显示。本操作为演示。</p>`;
+  openOverlay("voteModal");
+}
+function submitVote(){
+  if(!voteCtx.id)return;
+  const note=$("#voteNote")?$("#voteNote").value.trim():"";
+  const reason=voteCtx.reason||note;
+  if(!reason){toast("请先选择或填写评议理由");return;}
+  State.votes[voteCtx.id]={reason:voteCtx.reason,note};
+  saveState();
+  const ov=$("#voteModal"); closeOverlay(ov);
+  const r=ov.getBoundingClientRect();
+  growLeaf(window.innerWidth/2-17, window.innerHeight/2-17);
+  toast("你的判断，正在帮助一项真实创造被看见",true);
+  renderBoard();
+}
+
+/* ============================================================
+   分享卡片 + Web Share + 复制 + 下载
+   ============================================================ */
+function shareData(m){
+  const rank=m?[...MEMBERS].sort((a,b)=>b.total-a.total).findIndex(x=>x.id===m.id)+1:null;
+  if(m) return {title:`${m.name} · ${m.proj}｜树成林 AI 榜`, name:m.name, proj:m.proj, board:m.tSocial?'社会价值榜':'综合榜', rank, score:m.total, result:m.result,
+    quote:"我在树成林种下了一颗 AI 创造的种子。它正在成长，也正在寻找同行的人。"};
+  return {title:"树成林 AI 榜｜让每一次创造长成一棵被看见的树", name:"树成林 AI 榜", proj:"全国大学生 AI 创造力与实践成长榜", board:"综合榜", rank:null, score:null,
+    result:"作品先于人气，证据先于口号，成长先于输赢。", quote:"一人一树，众人成林。让每一次创造被看见，让每一种成长都有坐标。"};
+}
+function createShareCard(m){
+  const d=shareData(m);
+  const url=(location.href.split("#")[0])+(m?("#member-"+m.id):"");
+  $("#shareModalBody").innerHTML=`
+    <span class="eyebrow">分享作品 · 不定向拉票</span>
+    <h3 class="h3" style="margin:8px 0 14px;">分享卡片预览</h3>
+    <div class="share-card" id="shareCardEl">
+      <div class="sc-brand"><svg width="16" height="16" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 27V13" stroke="#B9DC76" stroke-width="2" stroke-linecap="round"/><path d="M16 15c-4 0-7-3-7-7 4 0 7 3 7 7z" fill="#B9DC76"/></svg> 树成林 AI 榜 · SHU CHENG LIN</div>
+      <div class="sc-name">${esc(d.name)}</div>
+      <div class="sc-proj">${esc(d.proj)}</div>
+      <div class="sc-stats">
+        ${d.rank?`<div><div class="v mono-num">#${d.rank}</div><div class="k">${esc(d.board)}</div></div>`:''}
+        ${d.score?`<div><div class="v mono-num">${d.score}</div><div class="k">综合得分</div></div>`:''}
+      </div>
+      <div class="sc-quote">${esc(d.quote)}</div>
+      <div class="sc-foot">
+        <div><div class="tiny" style="color:rgba(243,245,239,.7)">${esc(d.result)}</div><div class="tiny" style="color:var(--sprout);margin-top:6px;">shuchenglin.ai · 树成林</div></div>
+        <div class="sc-qr" aria-label="二维码预留区"><svg width="46" height="46" viewBox="0 0 46 46"><rect width="46" height="46" fill="#fff"/><g fill="#10251B">${qrDots()}</g></svg></div>
+      </div>
+    </div>
+    <div class="share-actions">
+      <button class="btn btn--primary btn--sm" id="sysShare">系统分享</button>
+      <button class="btn btn--ghost btn--sm" id="copyLink">复制链接</button>
+      <button class="btn btn--ghost btn--sm" id="dlCard">下载分享卡片</button>
+    </div>
+    <p class="share-note">分享只会进入完整榜单或项目详情，不生成定向拉票链接。</p>`;
+  openOverlay("shareModal");
+
+  $("#sysShare").onclick=async()=>{
+    if(navigator.share){try{await navigator.share({title:d.title,text:d.quote,url});}catch(e){}}
+    else {copy(url);toast("当前环境不支持系统分享，已复制链接");}
+  };
+  $("#copyLink").onclick=()=>{copy(url);};
+  $("#dlCard").onclick=()=>downloadCard(d);
+}
+function qrDots(){ // 装饰性二维码（占位，非真实可扫）
+  let s='<rect x="2" y="2" width="12" height="12" fill="none" stroke="#10251B" stroke-width="3"/><rect x="32" y="2" width="12" height="12" fill="none" stroke="#10251B" stroke-width="3"/><rect x="2" y="32" width="12" height="12" fill="none" stroke="#10251B" stroke-width="3"/>';
+  for(let i=0;i<60;i++){const x=18+(i%7)*4, y=18+Math.floor(i/7)*4; if((i*7)%3) s+=`<rect x="${x}" y="${y}" width="3" height="3"/>`;}
+  return s;
+}
+function copy(text){
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(()=>toast("链接已复制")).catch(()=>fallbackCopy(text));}
+  else fallbackCopy(text);
+}
+function fallbackCopy(text){
+  const ta=document.createElement("textarea");ta.value=text;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();
+  try{document.execCommand("copy");toast("链接已复制");}catch(e){toast("复制失败，请手动复制");}
+  ta.remove();
+}
+/* 用 canvas 生成分享卡片 PNG（离线可用） */
+function downloadCard(d){
+  const W=1080,H=1350,c=document.createElement("canvas");c.width=W;c.height=H;const x=c.getContext("2d");
+  const g=x.createLinearGradient(0,0,W,H);g.addColorStop(0,"#13301F");g.addColorStop(1,"#10251B");x.fillStyle=g;x.fillRect(0,0,W,H);
+  x.fillStyle="#B9DC76";x.font="600 34px sans-serif";x.fillText("树成林 AI 榜 · SHU CHENG LIN",80,120);
+  x.fillStyle="#F3F5EF";x.font="700 92px sans-serif";x.fillText(d.name,80,260);
+  x.fillStyle="rgba(243,245,239,.86)";x.font="400 44px sans-serif";x.fillText(d.proj,80,330);
+  let yy=470;
+  if(d.rank){x.fillStyle="#B9DC76";x.font="700 96px sans-serif";x.fillText("#"+d.rank,80,yy);x.fillStyle="rgba(243,245,239,.7)";x.font="400 34px sans-serif";x.fillText(d.board,80,yy+50);}
+  if(d.score){x.fillStyle="#B9DC76";x.font="700 96px sans-serif";x.fillText(String(d.score),480,yy);x.fillStyle="rgba(243,245,239,.7)";x.font="400 34px sans-serif";x.fillText("综合得分",480,yy+50);}
+  // 引用（换行）
+  x.fillStyle="#B9DC76";x.fillRect(80,640,6,150);
+  x.fillStyle="rgba(243,245,239,.9)";x.font="400 40px sans-serif";
+  wrapText(x,d.quote,120,690,860,56);
+  x.fillStyle="rgba(243,245,239,.6)";x.font="400 32px sans-serif";
+  wrapText(x,d.result,80,950,920,46);
+  x.fillStyle="#B9DC76";x.font="600 34px sans-serif";x.fillText("分享作品，不定向拉票 · shuchenglin.ai",80,H-90);
+  const a=document.createElement("a");a.download=`树成林-${d.name}-分享卡片.png`;a.href=c.toDataURL("image/png");a.click();
+  toast("分享卡片已开始下载");
+}
+function wrapText(ctx,text,x,y,maxW,lh){
+  const chars=String(text).split("");let line="",yy=y;
+  for(const ch of chars){const test=line+ch;if(ctx.measureText(test).width>maxW){ctx.fillText(line,x,yy);line=ch;yy+=lh;}else line=test;}
+  ctx.fillText(line,x,yy);
+}
+function contact(id){const m=byId(id);if(!m)return;toast(`已向 ${m.name} 发送合作意向（演示）`,true);}
+function toggleFav(id,btn){
+  const i=State.fav.indexOf(id);
+  if(i>=0){State.fav.splice(i,1);toast("已取消收藏");}else{State.fav.push(id);toast("已收藏，可在个人空间查看",true);}
+  saveState();renderBoard();
+  if($("#memberDrawer").classList.contains("open"))openMember(id);
+}
+/* ============================================================
+   AI 生长舱：表单 → 评分动画 → 报告 → 模拟冲榜
+   ============================================================ */
+let labFiles=[];
+function gatherInput(){
+  return {
+    name:$("#f-name").value||"未命名作品",
+    type:$("#f-type").value,
+    stage:$("#f-stage").value,
+    intro:$("#f-intro").value,
+    target:$("#f-users-who").value,
+    problem:$("#f-problem").value,
+    tools:$("#f-tools").value,
+    link:$("#f-link").value,
+    repo:$("#f-repo").value,
+    users:+$("#f-users").value,
+    revenue:+$("#f-revenue").value,
+    social:$("#f-social").value,
+    evidence:$("#f-evidence").value,
+    update:+$("#f-update").value,
+    help:+$("#f-help").value,
+    media:labFiles.length
+  };
+}
+function runScoring(){
+  const input=gatherInput();
+  const r=calculateAIScore(input);
+  State.lastReport={total:r.total}; saveState();
+  $("#reportEmpty").style.display="none";
+  $("#report").classList.remove("show");
+  const sc=$("#scoring");sc.classList.add("show");
+  const ring=$("#ringFill");
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const steps=["正在读取作品资料…","分析成果证据与完整度…","按公开标准结构化评分…","匹配适合的榜单…","生成成长建议与风险提示…"];
+  let i=0;
+  const stepEl=$("#scoringStep");
+  function finish(){
+    sc.classList.remove("show");
+    renderReport(r);
+    renderRush(r);
+    $("#report").classList.add("show");
+    toast("AI 模拟评分完成（Demo）",true);
+  }
+  if(reduce){ stepEl.textContent=steps[steps.length-1]; ring.style.strokeDashoffset=314-314*(r.total/100); finish(); return; }
+  ring.style.strokeDashoffset="314";
+  const dur=1600, t0=performance.now(), target=314-314*(r.total/100);
+  function anim(t){const p=clamp((t-t0)/dur,0,1);ring.style.strokeDashoffset=314-(314-target)*p;if(p<1)requestAnimationFrame(anim);}
+  requestAnimationFrame(anim);
+  stepEl.textContent=steps[0];
+  const iv=setInterval(()=>{i++;if(i<steps.length)stepEl.textContent=steps[i];else{clearInterval(iv);finish();}},340);
+}
+function renderReport(r){
+  const dn=r.dimNames, keys=Object.keys(r.dim);
+  $("#report").innerHTML=`
+    <div class="score-hero">
+      <div class="big mono-num">${r.total}</div>
+      <div><div class="cap">综合模拟评分</div>
+        <span class="conf">AI 置信度 ${(r.confidence*100).toFixed(0)}% · 证据完整度 ${r.completeness}%</span></div>
+    </div>
+    <div>${keys.map(k=>`<div class="dimbar"><div class="dt"><span>${dn[k]}</span><b class="mono-num">${r.dim[k]}</b></div><div class="track"><i data-fill="${r.dim[k]}"></i></div></div>`).join("")}</div>
+
+    <div class="report-block"><h4>当前优势</h4><div class="tag-list">${r.strengths.map(s=>`<span class="t">${esc(s)}</span>`).join("")}</div></div>
+    <div class="report-block"><h4>主要短板</h4><div class="tag-list">${r.weaknesses.map(s=>`<span class="t warn">${esc(s)}</span>`).join("")}</div></div>
+
+    <div class="report-block"><h4>适合参与的榜单 · 预计位次</h4><div class="fitlist">
+      ${r.fits.map(f=>`<div class="fititem"><span>${esc(f.nm)}</span><b>预计 ${esc(f.pct)}</b></div>`).join("")}</div></div>
+
+    <div class="report-block"><h4>下一阶段三个具体行动</h4><ol class="actionlist">
+      ${generateGrowthTasks(r).slice(0,3).map(t=>`<li>${esc(t.tt)}（${esc(t.ts)}）</li>`).join("")}</ol></div>
+
+    <div class="report-block"><h4>需要人工复核 / 风险与合规提醒</h4>
+      <div class="tag-list" style="flex-direction:column;align-items:stretch;">
+      ${r.needReview.map(s=>`<span class="t">复核：${esc(s)}</span>`).join("")}
+      ${r.risks.map(s=>`<span class="t warn">提醒：${esc(s)}</span>`).join("")}</div></div>
+
+    <div class="report-block" style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="btn btn--gold btn--sm" data-jump="rush">进入模拟冲榜</button>
+      <button class="btn btn--light btn--sm" id="reportShare">生成分享卡片</button>
+      <button class="btn btn--light btn--sm" id="reportCriteria">查看评分标准</button>
+    </div>
+    <p class="tiny" style="color:rgba(243,245,239,.55);margin-top:14px;">本报告由前端 Demo 逻辑根据你的输入动态生成，<b style="color:var(--sprout)">非真实模型调用</b>。模拟评分只用于成长参考，不代表正式榜单结果。</p>`;
+  // 动画填充
+  requestAnimationFrame(()=>{ $$("#report .track > i").forEach(i=>i.style.width=i.dataset.fill+"%"); });
+  $("#reportShare").onclick=()=>{const d={...shareData(null),name:r.input.name,proj:r.input.type+" 作品",score:r.total,rank:null,board:"AI 生长舱",result:r.strengths.join(" · ")+" 表现突出",quote:"我把作品交给了 AI 生长舱，看见了它还能长到哪里。"};createShareCard(null);setTimeout(()=>{/*用自定义数据重绘*/buildCustomShare(d);},10);};
+  $("#reportCriteria").onclick=openCriteria;
+}
+function buildCustomShare(d){
+  const el=$("#shareCardEl"); if(!el)return;
+  el.querySelector(".sc-name").textContent=d.name;
+  el.querySelector(".sc-proj").textContent=d.proj;
+  el.querySelector(".sc-stats").innerHTML=`<div><div class="v mono-num">${d.score}</div><div class="k">${d.board}</div></div>`;
+  el.querySelector(".sc-quote").textContent=d.quote;
+  $("#dlCard").onclick=()=>downloadCard(d);
+  $("#sysShare").onclick=async()=>{const url=location.href.split("#")[0];if(navigator.share){try{await navigator.share({title:"树成林 AI 榜",text:d.quote,url});}catch(e){}}else copy(url);};
+}
+function renderRush(r){
+  const tasks=generateGrowthTasks(r);
+  const base=clamp(Math.round(60-(r.total-60)),5,60); // 越高分排名越靠前
+  const rank=clamp(Math.round(base+ (60-r.total)/2),3,60);
+  $("#rushRank").textContent="第 "+rank+" 名";
+  const bestFit=r.fits[0]?r.fits[0].nm:"新芽榜";
+  $("#rushTarget").textContent="目标榜单："+bestFit;
+  $("#rushBest").textContent=r.strengths[0];
+  $("#rushWorst").textContent=r.weaknesses[0];
+  $("#rushGapPrev").textContent="+"+(1+ (rank%3)*0.7).toFixed(1);
+  $("#rushGapAvg").textContent="+"+(2+ (rank%4)*0.6).toFixed(1);
+  const total=tasks.reduce((a,t)=>a+t.gain,0);
+  $("#taskList").innerHTML=tasks.map((t,i)=>`
+    <div class="task"><button class="task-check" data-task="${i}" aria-label="标记完成"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 6" stroke="#16301f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <div class="task-body"><div class="tt">${esc(t.tt)}</div><div class="ts">${esc(t.ts)}</div></div>
+    <div class="task-gain">+${t.gain.toFixed(1)}</div></div>`).join("");
+  const targetRank=clamp(rank-Math.round(total/1.5),1,rank);
+  $("#rushProj").innerHTML=`完成全部任务后，预计可提升约 <b>+${total.toFixed(1)}</b> 分，进入前 <b>${targetRank}</b> 名。`;
+  // 任务勾选交互
+  let done=0;
+  $$("#taskList .task-check").forEach((b,i)=>{
+    b.onclick=()=>{
+      b.classList.toggle("done");
+      done=$$("#taskList .task-check.done").length;
+      const gained=$$("#taskList .task-check.done").reduce((a,el)=>a+tasks[+el.dataset.task].gain,0);
+      const nr=clamp(rank-Math.round(gained/1.5),1,rank);
+      $("#rushRank").textContent="第 "+nr+" 名";
+      $("#rushProj").innerHTML= done===tasks.length
+        ?`已完成全部任务，预计综合提升 <b>+${total.toFixed(1)}</b> 分，进入前 <b>${targetRank}</b> 名。真正的冲榜，是让作品配得上更高的位置。`
+        :`已完成 ${done}/${tasks.length} 项，预计已提升 <b>+${gained.toFixed(1)}</b> 分。`;
+      const rc=b.getBoundingClientRect();
+      if(b.classList.contains("done"))growLeaf(rc.left,rc.top);
+    };
+  });
+}
+function renderFilePreview(){
+  $("#dzPreview").innerHTML=labFiles.map((f,i)=>{
+    if(f.url&&f.type.startsWith("image"))return `<div class="dz-thumb"><img src="${f.url}" alt="${esc(f.name)}"/></div>`;
+    return `<div class="dz-thumb">${f.type.startsWith("video")?'视频':'文件'}<br>${esc(f.name.slice(0,6))}</div>`;
+  }).join("");
+}
+function addFiles(fileList){
+  Array.from(fileList).slice(0,6).forEach(f=>{
+    const item={name:f.name,type:f.type,url:null};
+    if(f.type.startsWith("image"))item.url=URL.createObjectURL(f);
+    labFiles.push(item);
+  });
+  labFiles=labFiles.slice(0,6);
+  renderFilePreview();
+}
+/* ============================================================
+   森林视觉：Hero + 页尾
+   ============================================================ */
+function buildHeroForest(){
+  const box=$("#heroForest"); if(!box)return;
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // 晨光 + 雾 + 数据驱动的树
+  const trees=[...MEMBERS].sort((a,b)=>b.total-a.total);
+  let html=`<svg width="100%" height="100%" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <defs><radialGradient id="sun" cx="80%" cy="14%" r="40%"><stop offset="0" stop-color="#F6E6BE" stop-opacity=".9"/><stop offset="1" stop-color="#F6E6BE" stop-opacity="0"/></radialGradient></defs>
+    <rect width="1440" height="900" fill="url(#sun)"/>`;
+  // 远景丘陵
+  html+=`<path d="M0 760 Q360 700 720 750 T1440 740 V900 H0Z" fill="#cfe0bb" opacity=".6"/>`;
+  html+=`<path d="M0 820 Q400 770 760 810 T1440 800 V900 H0Z" fill="#bcd5a2" opacity=".7"/>`;
+  // 一排树
+  const n=11;
+  for(let i=0;i<n;i++){
+    const m=trees[i%trees.length];
+    const x=60+i*(1320/(n-1));
+    const sc=0.7+((i*53)%10)/14;
+    const delay=(i*0.18).toFixed(2);
+    const grow=reduce?'':`transform-origin:${x}px 840px;animation:scl_grow 1.4s cubic-bezier(.22,.61,.36,1) ${delay}s both;`;
+    html+=`<g style="${grow}" transform="translate(${x-55} ${840-150*sc})">${treeInner(m,sc)}</g>`;
+  }
+  html+=`</svg>`;
+  box.innerHTML=html;
+  // 漂浮叶片
+  if(!reduce){
+    for(let i=0;i<7;i++){
+      const leaf=document.createElement("div");
+      leaf.className="leaf";
+      const size=8+Math.random()*10;
+      leaf.style.left=(8+Math.random()*84)+"%";
+      leaf.style.bottom=(20+Math.random()*50)+"%";
+      leaf.style.animationDuration=(7+Math.random()*7)+"s";
+      leaf.style.animationDelay=(Math.random()*6)+"s";
+      leaf.innerHTML=`<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none"><path d="M5 19C5 11 12 6 19 6c0 8-7 13-14 13z" fill="#7aa24f" opacity=".55"/></svg>`;
+      $(".hero").appendChild(leaf);
+    }
+  }
+}
+function treeInner(m,sc){ // 返回不含外层 svg 的树（用于场景内嵌）
+  const s=treeSVG(m,{scale:sc,w:110,h:160});
+  return s.replace(/^<svg[^>]*>/,"").replace(/<\/svg>$/,"");
+}
+function buildFooterForest(){
+  const el=$("#footerForest"); if(!el)return;
+  let p='';
+  for(let i=0;i<26;i++){const x=i*58+10,h=40+((i*37)%70),w=22+((i*13)%18);
+    p+=`<path d="M${x} 160 L${x-w} ${160-h*0.5} L${x} ${160-h} L${x+w} ${160-h*0.5}Z" fill="#0f2e1e" opacity="${0.4+((i%4)/10)}"/><rect x="${x-2}" y="${160-h*0.5}" width="4" height="${h*0.5}" fill="#0b2417"/>`;}
+  el.innerHTML=p;
+}
+
+/* ============================================================
+   滚动出现 / 导航
+   ============================================================ */
+function setupReveal(){
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in");
+      if(e.target.id==="judge"||e.target.querySelector&&e.target.querySelector("#weights")){animateWeights();}
+      io.unobserve(e.target);} });
+  },{threshold:.12});
+  $$(".reveal").forEach(el=>io.observe(el));
+  // 权重也单独观察
+  const jp=$("#judge"); if(jp){const io2=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){animateWeights();io2.disconnect();}});},{threshold:.2});io2.observe(jp);}
+}
+function animateWeights(){ $$("#weights .weight-bar > i").forEach(i=>{ if(i.dataset.w) i.style.width=i.dataset.w+"%"; }); }
+
+function toggleMobile(open){
+  const mm=$("#mobileMenu"); const t=$("#navToggle");
+  mm.classList.toggle("open",open);
+  t.setAttribute("aria-expanded",open?"true":"false");
+  document.body.style.overflow=open?"hidden":"";
+  if(open){const f=mm.querySelector("a,button");if(f)setTimeout(()=>f.focus(),60);}
+}
+function jumpTo(sel){
+  const el=document.getElementById(sel)||$("#"+sel);
+  if(el){const y=el.getBoundingClientRect().top+window.scrollY-58;window.scrollTo({top:y,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});}
+}
+
+/* ============================================================
+   事件绑定（委托）
+   ============================================================ */
+function bindEvents(){
+  // 全局点击委托
+  document.addEventListener("click",e=>{
+    const t=e.target.closest("[data-member],[data-project],[data-vote],[data-fav],[data-share],[data-contact],[data-badge],[data-jump],[data-board],[data-sub],[data-ff],[data-reason],[data-close]");
+    if(!t)return;
+    if(t.hasAttribute("data-close")){const ov=t.closest(".overlay");if(ov)closeOverlay(ov);return;}
+    if(t.dataset.jump!=null){
+      // 关闭打开的弹窗后跳转
+      $$(".overlay.open").forEach(closeOverlay); toggleMobile(false);
+      jumpTo(t.dataset.jump); return;
+    }
+    if(t.dataset.board!=null){Board.k=t.dataset.board;Board.sub=null;renderTabs();renderBoard();
+      $$("#boardTabs .tab").forEach(x=>{const on=x.dataset.board===Board.k;x.classList.toggle("active",on);x.setAttribute("aria-selected",on);});return;}
+    if(t.dataset.sub!=null){Board.sub=t.dataset.sub||null;renderSubtabs();renderBoard();return;}
+    if(t.dataset.ff!=null){ForestF.k=t.dataset.ff;renderForestFilters();renderForest();return;}
+    if(t.dataset.fav!=null){toggleFav(t.dataset.fav,t);return;}
+    if(t.dataset.vote!=null){openVote(t.dataset.vote);return;}
+    if(t.dataset.share!=null){createShareCard(byId(t.dataset.share));return;}
+    if(t.dataset.contact!=null){contact(t.dataset.contact);return;}
+    if(t.dataset.badge!=null){openBadge(t.dataset.badge);return;}
+    if(t.dataset.project!=null){openProject(t.dataset.project);return;}
+    if(t.dataset.reason!=null){voteCtx.reason=t.dataset.reason;$$("#reasonOpts .reason-opt").forEach(x=>x.classList.toggle("sel",x===t));return;}
+    if(t.dataset.member!=null){openMember(t.dataset.member);return;}
+  });
+  // 键盘：Enter/Space 触发 role=button 的卡片/行
+  document.addEventListener("keydown",e=>{
+    if(e.key==="Escape"){ if(closeTop())e.preventDefault(); return; }
+    if((e.key==="Enter"||e.key===" ")){
+      const el=e.target;
+      // 仅处理非原生 button 的 role=button 卡片（原生 button 已自动响应回车/空格）
+      if(el.matches&&el.tagName!=="BUTTON"&&el.matches('[role="button"][data-member],[role="button"][data-project]')){e.preventDefault();el.click();}
+    }
+  });
+  // 点击遮罩关闭
+  $$(".overlay").forEach(ov=>ov.addEventListener("click",e=>{if(e.target===ov)closeOverlay(ov);}));
+  $("#mobileMenu").addEventListener("click",e=>{if(e.target===$("#mobileMenu"))toggleMobile(false);});
+  $$("#mobileMenu a").forEach(a=>a.addEventListener("click",()=>toggleMobile(false)));
+  $("#mobileClose").onclick=()=>toggleMobile(false);
+  $("#navToggle").onclick=()=>toggleMobile(true);
+
+  // 导航滚动态
+  const nav=$("#nav");
+  const onScroll=()=>nav.classList.toggle("scrolled",window.scrollY>20);
+  window.addEventListener("scroll",onScroll,{passive:true});onScroll();
+  $("#navSearch").onclick=()=>{jumpTo("board");setTimeout(()=>$("#searchInput").focus(),400);};
+  $("#navLogin").onclick=()=>toast("登录功能将在正式版开放（演示）");
+  $("#shareSite").onclick=()=>createShareCard(null);
+  $("#appealBtn").onclick=()=>toast("已记录申诉请求，将在 7 个工作日内复核（演示）",true);
+
+  // 榜单工具
+  let st;
+  $("#searchInput").addEventListener("input",e=>{clearTimeout(st);st=setTimeout(()=>{Board.q=e.target.value.trim();renderBoard();},160);});
+  $("#timeFilter").onchange=e=>{Board.time=e.target.value;renderBoard();};
+  $("#scopeFilter").onchange=e=>{Board.scope=e.target.value;renderBoard();};
+
+  // 城市/高校切换
+  $$('.cs-toggle button').forEach(b=>b.onclick=()=>{
+    PlaceState.k=b.dataset.place;renderPlaces();
+    $$('.cs-toggle button').forEach(x=>{const on=x===b;x.classList.toggle("active",on);x.setAttribute("aria-selected",on);});
+  });
+
+  // 评分标准入口
+  ["#openCriteria","#openCriteria2"].forEach(s=>{const el=$(s);if(el)el.onclick=openCriteria;});
+  document.addEventListener("click",e=>{if(e.target.closest("#openCriteria3"))openCriteria();});
+
+  // 生长舱
+  $("#labForm").addEventListener("submit",e=>{e.preventDefault();runScoring();jumpTo("lab");});
+  $("#f-update").addEventListener("input",e=>$("#updateVal").textContent=e.target.value+" 周");
+  $("#f-help").addEventListener("input",e=>$("#helpVal").textContent=e.target.value+" 人");
+  const dz=$("#dropzone"),fi=$("#fileInput");
+  dz.onclick=()=>fi.click();
+  dz.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();fi.click();}};
+  dz.addEventListener("dragover",e=>{e.preventDefault();dz.style.borderColor="#B9DC76";});
+  dz.addEventListener("dragleave",()=>dz.style.borderColor="");
+  dz.addEventListener("drop",e=>{e.preventDefault();dz.style.borderColor="";if(e.dataTransfer.files)addFiles(e.dataTransfer.files);});
+  fi.addEventListener("change",e=>{if(e.target.files)addFiles(e.target.files);});
+
+  // 投票提交（委托到弹窗内按钮）
+  document.addEventListener("click",e=>{if(e.target.closest("#voteSubmit")&&!e.target.closest("#voteSubmit").disabled)submitVote();});
+}
+
+/* ============================================================
+   初始化
+   ============================================================ */
+function init(){
+  loadState();
+  injectKeyframes();
+  renderStats();
+  renderPodium();
+  renderTabs();
+  renderBoard();
+  renderJudge();
+  renderRecs();
+  renderForestFilters();
+  renderForest();
+  renderPlaces();
+  renderLevels();
+  renderBadges();
+  renderStories();
+  renderFair();
+  buildHeroForest();
+  buildFooterForest();
+  setupReveal();
+  bindEvents();
+  // 深链：#member-xxx
+  if(location.hash.startsWith("#member-")){const id=location.hash.slice(8);if(byId(id))setTimeout(()=>openMember(id),400);}
+}
+function injectKeyframes(){
+  const s=document.createElement("style");
+  s.textContent="@keyframes scl_grow{0%{transform:scaleY(0);opacity:0}60%{opacity:1}100%{transform:scaleY(1);opacity:1}}";
+  document.head.appendChild(s);
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
+
+})();
+/*JSEND*/
+</script>
+</body>
+</html>
