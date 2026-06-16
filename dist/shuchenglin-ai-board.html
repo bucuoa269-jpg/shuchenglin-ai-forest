@@ -264,8 +264,8 @@ input,textarea,select{font-family:inherit;font-size:inherit;color:inherit;}
 .hero-forest{position:absolute;inset:0;z-index:0;pointer-events:none;will-change:transform;}
 .hero-forest svg{width:100%;height:100%;}
 .hero-fog{
-  position:absolute;left:0;right:0;bottom:0;height:50%;z-index:1;pointer-events:none;
-  background:linear-gradient(180deg,transparent,rgba(244,247,238,.0) 8%,rgba(243,246,236,.4) 52%,rgba(241,245,233,.82) 82%,#F1F5E9 100%);
+  position:absolute;left:0;right:0;bottom:0;height:30%;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,transparent 0%,rgba(243,246,236,.16) 55%,rgba(241,245,233,.5) 88%,rgba(241,245,233,.86) 100%);
 }
 .hero-content{position:relative;z-index:2;max-width:820px;padding:48px 0;}
 .hero .eyebrow{animation:fadeUpHero .9s var(--ease-out) both;}
@@ -1622,6 +1622,14 @@ const USERS_LABEL=["暂无用户","1—50","50—500","500—5000","5000 以上"
    持续更新→叶片密度 · 社群贡献→新芽 · 时间→年轮
    ============================================================ */
 let treeUID=0;
+/* 精选森林色板：和谐的深浅绿 + 少量晨光暖调，营造清晨森林而非彩色糖果林 */
+const FOREST_PAL=[
+  ["#1d4631","#3c7a53"],["#23503a","#4f8a5e"],["#2c6446","#73ae7e"],
+  ["#33602c","#7aa24f"],["#1b3f2f","#356b48"],["#436d2d","#8cb565"],
+  ["#295540","#5e9c6e"],["#37663a","#7fb069"]
+];
+const FOREST_WARM=[["#5a6b2c","#bcc56c"],["#6b5a2c","#c8ab63"],["#4e6b34","#a9c178"]];
+const hashId=s=>[...String(s)].reduce((a,c)=>a+c.charCodeAt(0),0);
 /* 颜色明暗调节（hex → 变亮/变暗） */
 function shade(hex,amt){
   let h=hex.replace('#','');if(h.length===3)h=h.split('').map(c=>c+c).join('');
@@ -1638,8 +1646,9 @@ function treeSVG(m,opts={}){
   const trunkH=clamp(40+d.te/2,46,96)*scale;          // 技术→高度
   const groundY=H-6*scale;
   const canopyR=clamp(26+d.us/2.4,30,66)*scale;       // 用户价值→树冠
-  const c1=m.av[0], c2=m.av[1];
-  const cLight=shade(c2,46), cDark=shade(c1,-42);     // 高光 / 暗部
+  const pal=opts.colors||FOREST_PAL[hashId(m.id)%FOREST_PAL.length]; // 统一森林色板（身份用头像区分，非树色）
+  const c1=pal[0], c2=pal[1];
+  const cLight=shade(c2,42), cDark=shade(c1,-34);     // 高光 / 暗部
   const dom=Math.max(d.te,d.cr,d.us);                  // 主导维度→树形
   let shape;
   if(dom===d.cr) shape="bushy"; else if(dom===d.te) shape="tall"; else shape="round";
@@ -2547,7 +2556,16 @@ function buildHeroForest(){
   const box=$("#heroForest"); if(!box)return;
   const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
   const trees=[...MEMBERS].sort((a,b)=>b.total-a.total);
-  const grow=(x,y,delay)=>reduce?'':`transform-origin:${x}px ${y}px;animation:scl_grow 1.5s cubic-bezier(.16,1,.3,1) ${delay}s both;`;
+  // 外层 g 用 translate 定位（属性），内层 g.hgrow 用 CSS 缩放从底部生长（互不覆盖）
+  let warmI=0;
+  const tree=(m,sc,x,y,delay,opacity)=>{
+    // 约 1/6 的树用晨光暖调，模拟阳光打在部分树冠上
+    const warm=(warmI++ %6===0)?FOREST_WARM[warmI%FOREST_WARM.length]:null;
+    const inner=treeInner(m,sc,warm);
+    const op=opacity!=null?` opacity="${opacity}"`:"";
+    if(reduce) return `<g transform="translate(${(x-55*sc).toFixed(1)} ${(y-160*sc).toFixed(1)})"${op}>${inner}</g>`;
+    return `<g transform="translate(${(x-55*sc).toFixed(1)} ${(y-160*sc).toFixed(1)})"${op}><g class="hgrow" style="animation-delay:${delay}s">${inner}</g></g>`;
+  };
   let html=`<svg width="100%" height="100%" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
     <defs>
       <radialGradient id="sun" cx="82%" cy="10%" r="46%"><stop offset="0" stop-color="#FBEFCF" stop-opacity=".95"/><stop offset="45%" stop-color="#F6E6BE" stop-opacity=".35"/><stop offset="100%" stop-color="#F6E6BE" stop-opacity="0"/></radialGradient>
@@ -2561,38 +2579,38 @@ function buildHeroForest(){
   html+=`<path d="M0 700 Q300 640 620 690 T1440 670 V900 H0Z" fill="url(#hillFar)" opacity=".55"/>`;
   html+=`<path d="M0 780 Q380 720 760 768 T1440 760 V900 H0Z" fill="url(#hillNear)" opacity=".7"/>`;
 
-  // ---- 远层（小、淡、虚化）：营造大气透视 ----
+  // ---- 远层（小、淡、虚化）：营造大气透视，连成一条远山林线 ----
   let far='';
-  const nf=16;
+  const nf=26;
   for(let i=0;i<nf;i++){
     const m=trees[(i*3)%trees.length];
-    const x=20+i*(1400/(nf-1));
-    const sc=0.34+((i*29)%10)/40;
-    far+=`<g style="${grow(x,760,(i*0.05).toFixed(2))}" transform="translate(${x-45} ${762-150*sc})" opacity=".5">${treeInner(m,sc)}</g>`;
+    const x=8+i*(1432/(nf-1));
+    const sc=0.5+((i*29)%10)/22;
+    far+=tree(m,sc,x,672,(i*0.03).toFixed(2),".62");
   }
   html+=`<g filter="url(#soft)">${far}</g>`;
-  // 雾带
-  html+=`<rect x="0" y="700" width="1440" height="120" fill="#F2F6EC" opacity=".45" filter="url(#soft)"/>`;
+  // 林间薄雾（只软化树干根部）
+  html+=`<rect x="0" y="612" width="1440" height="120" fill="#EEF3E6" opacity=".3" filter="url(#soft)"/>`;
 
-  // ---- 中层 ----
+  // ---- 中层：连续树冠 ----
   let mid='';
-  const nm=10;
+  const nm=18;
   for(let i=0;i<nm;i++){
     const m=trees[(i*2)%trees.length];
-    const x=70+i*(1300/(nm-1));
-    const sc=0.6+((i*47)%10)/22;
-    mid+=`<g style="${grow(x,818,(0.2+i*0.09).toFixed(2))}" transform="translate(${x-55} ${818-160*sc})" opacity=".88">${treeInner(m,sc)}</g>`;
+    const x=18+i*(1404/(nm-1));
+    const sc=0.92+((i*47)%10)/12;
+    mid+=tree(m,sc,x,792,(0.14+i*0.045).toFixed(2),".96");
   }
   html+=`<g filter="url(#soft2)">${mid}</g>`;
 
-  // ---- 近层（大、清晰、压低）----
+  // ---- 近层（大、清晰、压低，部分出血形成前景）----
   let near='';
-  const nn=6;
+  const nn=10;
   for(let i=0;i<nn;i++){
     const m=trees[i%trees.length];
-    const x=120+i*(1240/(nn-1));
-    const sc=1.05+((i*53)%10)/16;
-    near+=`<g style="${grow(x,880,(0.4+i*0.12).toFixed(2))}" transform="translate(${x-70} ${884-170*sc})">${treeInner(m,sc)}</g>`;
+    const x=40+i*(1360/(nn-1));
+    const sc=1.55+((i*53)%10)/7;
+    near+=tree(m,sc,x,912,(0.38+i*0.08).toFixed(2),null);
   }
   html+=near;
   html+=`</svg>`;
@@ -2614,8 +2632,8 @@ function buildHeroForest(){
     }
   }
 }
-function treeInner(m,sc){ // 返回不含外层 svg 的树（用于场景内嵌）
-  const s=treeSVG(m,{scale:sc,w:110,h:160});
+function treeInner(m,sc,colors){ // 返回不含外层 svg 的树（用于场景内嵌）
+  const s=treeSVG(m,{scale:sc,w:110,h:160,colors:colors||undefined});
   return s.replace(/^<svg[^>]*>/,"").replace(/<\/svg>$/,"");
 }
 function buildFooterForest(){
@@ -2784,7 +2802,11 @@ function init(){
 }
 function injectKeyframes(){
   const s=document.createElement("style");
-  s.textContent="@keyframes scl_grow{0%{transform:scaleY(0);opacity:0}60%{opacity:1}100%{transform:scaleY(1);opacity:1}}";
+  s.textContent=
+    "@keyframes scl_grow{0%{transform:scaleY(.02) scaleX(.7);opacity:0}45%{opacity:1}100%{transform:scaleY(1) scaleX(1);opacity:1}}"+
+    /* 关键：从底部中心生长，且只作用于内层 g（外层用 translate 定位，互不覆盖） */
+    ".hgrow{transform-box:fill-box;transform-origin:50% 100%;animation:scl_grow 1.6s cubic-bezier(.16,1,.3,1) both;will-change:transform,opacity;}"+
+    "@media(prefers-reduced-motion:reduce){.hgrow{animation:none!important;}}";
   document.head.appendChild(s);
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();

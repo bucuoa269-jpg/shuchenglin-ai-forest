@@ -3,3 +3,6 @@
 Thumbs.db
 .DS_Store
 *.log
+_*.png
+_preview.html
+shuchenglin-ai-board-screenshot.png
